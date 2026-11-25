@@ -1,0 +1,492 @@
+# Copyright (C) 2026 
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: ThemeToggle 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/themetoggle\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-25T15:51:49+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: themetoggle\n"
+
+#. Plugin Name of the plugin
+#: themetoggle.php
+#: admin/class-admin.php:104
+#: admin/class-admin.php:105
+#: admin/views/settings-page.php:20
+msgid "ThemeToggle"
+msgstr ""
+
+#. Description of the plugin
+#: themetoggle.php
+msgid "Enable user-specific WordPress themes with role-based permissions and personalized theme switching."
+msgstr ""
+
+#: admin/class-admin.php:90
+#: admin/views/settings-general.php:24
+msgid "General Settings"
+msgstr ""
+
+#: admin/class-admin.php:91
+msgid "Role-Based Themes"
+msgstr ""
+
+#: admin/class-admin.php:92
+msgid "User Profiles"
+msgstr ""
+
+#: admin/class-admin.php:93
+msgid "Floating Button"
+msgstr ""
+
+#: admin/class-admin.php:127
+msgid "Settings"
+msgstr ""
+
+#: admin/class-admin.php:175
+msgid "This permanently removes the saved theme preference of every user. Continue?"
+msgstr ""
+
+#: admin/class-admin.php:199
+msgid "Sorry, you are not allowed to access this page."
+msgstr ""
+
+#: admin/class-admin.php:244
+msgid "Sorry, you are not allowed to do that."
+msgstr ""
+
+#: admin/views/floating-button.php:25
+msgid "Theme preview"
+msgstr ""
+
+#. translators: %s: Theme name.
+#: admin/views/floating-button.php:29
+#, php-format
+msgid "Previewing: %s"
+msgstr ""
+
+#: admin/views/floating-button.php:37
+msgid "Use this theme"
+msgstr ""
+
+#: admin/views/floating-button.php:39
+msgid "Exit preview"
+msgstr ""
+
+#: admin/views/profile-section.php:17
+msgid "Personal Theme Settings"
+msgstr ""
+
+#: admin/views/profile-section.php:20
+#: admin/views/profile-section.php:52
+msgid "Choose Your Website Theme"
+msgstr ""
+
+#: admin/views/profile-section.php:26
+msgid "The selected theme applies only to your own logged-in sessions. Visitors and other users keep seeing the site default theme."
+msgstr ""
+
+#: admin/views/profile-section.php:28
+msgid "The selected theme applies only to this user's logged-in sessions."
+msgstr ""
+
+#: admin/views/profile-section.php:33
+msgid "Current Selection:"
+msgstr ""
+
+#. translators: %s: Theme name.
+#: admin/views/profile-section.php:43
+#, php-format
+msgid "The saved theme \"%s\" is currently not available for this account, so the default theme is used. The saved preference is kept and will apply again if it becomes available."
+msgstr ""
+
+#. translators: %s: Theme name.
+#: admin/views/profile-section.php:61
+#, php-format
+msgid "Keep saved preference (%s, currently unavailable)"
+msgstr ""
+
+#: admin/views/profile-section.php:74
+#: admin/views/settings-general.php:56
+#: includes/class-user-profile.php:128
+#: includes/class-users-list.php:124
+msgid "Default Theme"
+msgstr ""
+
+#: admin/views/profile-section.php:91
+msgid "Available for your role"
+msgstr ""
+
+#: admin/views/profile-section.php:93
+msgid "Available for this user's role"
+msgstr ""
+
+#: admin/views/profile-section.php:102
+msgid "Preview before applying"
+msgstr ""
+
+#: admin/views/profile-section.php:103
+msgid "(opens in a new tab)"
+msgstr ""
+
+#: admin/views/settings-general.php:28
+msgid "Enable Theme Switching"
+msgstr ""
+
+#: admin/views/settings-general.php:32
+msgid "Enable user-specific theme switching"
+msgstr ""
+
+#: admin/views/settings-general.php:34
+msgid "When disabled, everyone sees the globally active theme. Saved user preferences are kept and apply again when switching is re-enabled."
+msgstr ""
+
+#: admin/views/settings-general.php:38
+msgid "Enable Theme Switching in Admin Panel"
+msgstr ""
+
+#: admin/views/settings-general.php:42
+msgid "Load the user's selected theme on wp-admin requests"
+msgstr ""
+
+#: admin/views/settings-general.php:45
+msgid "What this actually changes:"
+msgstr ""
+
+#: admin/views/settings-general.php:47
+msgid "The selected theme's functions.php (and any admin pages, menus, meta boxes or editor features it registers) is loaded instead of the default theme's."
+msgstr ""
+
+#: admin/views/settings-general.php:48
+msgid "The block editor uses the selected theme's theme.json, editor styles and templates."
+msgstr ""
+
+#: admin/views/settings-general.php:49
+msgid "The WordPress admin interface itself is NOT restyled by the frontend theme."
+msgstr ""
+
+#: admin/views/settings-general.php:50
+msgid "For safety the default theme is always used on: Themes, Theme File Editor, Add Themes, Site Editor, Customizer, Widgets, Menus, Updates, and this settings page."
+msgstr ""
+
+#: admin/views/settings-general.php:65
+msgid "Stylesheet directory:"
+msgstr ""
+
+#: admin/views/settings-general.php:71
+msgid "Detected automatically. ThemeToggle never changes the globally active theme; change it under Appearance → Themes."
+msgstr ""
+
+#: admin/views/settings-general.php:77
+msgid "Fallback behavior"
+msgstr ""
+
+#: admin/views/settings-general.php:79
+msgid "The default theme is always used when a user has no selection, is not authorized, or has a saved theme that is invalid, no longer permitted, or no longer installed."
+msgstr ""
+
+#: admin/views/settings-interface.php:19
+msgid "Bottom Right"
+msgstr ""
+
+#: admin/views/settings-interface.php:20
+msgid "Bottom Left"
+msgstr ""
+
+#: admin/views/settings-interface.php:21
+msgid "Top Right"
+msgstr ""
+
+#: admin/views/settings-interface.php:22
+msgid "Top Left"
+msgstr ""
+
+#: admin/views/settings-interface.php:25
+msgid "Small"
+msgstr ""
+
+#: admin/views/settings-interface.php:26
+msgid "Medium"
+msgstr ""
+
+#: admin/views/settings-interface.php:27
+msgid "Large"
+msgstr ""
+
+#: admin/views/settings-interface.php:30
+msgid "No icon"
+msgstr ""
+
+#: admin/views/settings-interface.php:31
+msgid "Undo arrow"
+msgstr ""
+
+#: admin/views/settings-interface.php:32
+msgid "House"
+msgstr ""
+
+#: admin/views/settings-interface.php:33
+msgid "Palette"
+msgstr ""
+
+#: admin/views/settings-interface.php:36
+msgid "Enable floating button"
+msgstr ""
+
+#: admin/views/settings-interface.php:36
+msgid "Show a button that switches the user back to the default theme."
+msgstr ""
+
+#: admin/views/settings-interface.php:37
+msgid "Frontend visibility"
+msgstr ""
+
+#: admin/views/settings-interface.php:37
+msgid "Show the button on the public site."
+msgstr ""
+
+#: admin/views/settings-interface.php:38
+msgid "Admin visibility"
+msgstr ""
+
+#: admin/views/settings-interface.php:38
+msgid "Show the button in wp-admin. It only appears when admin theme switching is enabled, because otherwise no custom theme is applied there."
+msgstr ""
+
+#: admin/views/settings-interface.php:45
+msgid "Floating Button Settings"
+msgstr ""
+
+#: admin/views/settings-interface.php:46
+msgid "The button is only shown to logged-in users whose valid custom theme is actually applied to the current page."
+msgstr ""
+
+#: admin/views/settings-interface.php:61
+msgid "Button position"
+msgstr ""
+
+#: admin/views/settings-interface.php:71
+msgid "Button label"
+msgstr ""
+
+#: admin/views/settings-interface.php:73
+#: includes/class-settings.php:224
+msgid "Switch to Default Theme"
+msgstr ""
+
+#: admin/views/settings-interface.php:74
+msgid "Leave empty to use the translatable default label."
+msgstr ""
+
+#: admin/views/settings-interface.php:78
+msgid "Background color"
+msgstr ""
+
+#: admin/views/settings-interface.php:82
+msgid "Text color"
+msgstr ""
+
+#: admin/views/settings-interface.php:86
+msgid "Border radius (px)"
+msgstr ""
+
+#: admin/views/settings-interface.php:90
+msgid "Button size"
+msgstr ""
+
+#: admin/views/settings-interface.php:100
+msgid "Icon"
+msgstr ""
+
+#. translators: %d: Number of users.
+#: admin/views/settings-page.php:30
+#, php-format
+msgid "Removed the saved theme preference of %d user."
+msgid_plural "Removed the saved theme preferences of %d users."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/views/settings-page.php:37
+msgid "Nothing was reset. Tick the confirmation box to reset all preferences."
+msgstr ""
+
+#: admin/views/settings-page.php:40
+msgid "ThemeToggle settings sections"
+msgstr ""
+
+#: admin/views/settings-role-themes.php:28
+#: admin/views/settings-role-themes.php:32
+msgid "User Roles Allowed to Switch Themes"
+msgstr ""
+
+#: admin/views/settings-role-themes.php:29
+msgid "Only users holding at least one of these roles see the profile theme selector. All other users always get the default theme."
+msgstr ""
+
+#: admin/views/settings-role-themes.php:41
+msgid "Role-Based Theme Assignment"
+msgstr ""
+
+#: admin/views/settings-role-themes.php:42
+msgid "Choose which installed themes each role may use. Users with several eligible roles get the combined list. Assignments on roles that are not allowed above have no effect until the role is allowed."
+msgstr ""
+
+#: admin/views/settings-role-themes.php:45
+msgid "No usable themes are installed."
+msgstr ""
+
+#: admin/views/settings-role-themes.php:50
+msgid "User Role"
+msgstr ""
+
+#: admin/views/settings-role-themes.php:51
+msgid "Allowed Themes"
+msgstr ""
+
+#: admin/views/settings-role-themes.php:64
+msgid "Allowed"
+msgstr ""
+
+#: admin/views/settings-role-themes.php:64
+msgid "Not allowed"
+msgstr ""
+
+#: admin/views/settings-role-themes.php:67
+msgid "All"
+msgstr ""
+
+#: admin/views/settings-role-themes.php:69
+msgid "None"
+msgstr ""
+
+#. translators: %s: Role name.
+#: admin/views/settings-role-themes.php:77
+#, php-format
+msgid "Allowed themes for %s"
+msgstr ""
+
+#: admin/views/settings-role-themes.php:95
+msgid "(site default)"
+msgstr ""
+
+#: admin/views/settings-users.php:14
+msgid "User Profile Theme Selector"
+msgstr ""
+
+#: admin/views/settings-users.php:16
+msgid "Eligible users choose their theme under Users → Profile → Personal Theme Settings. The selector is only shown when theme switching is enabled, the user holds an allowed role, and at least one permitted theme (other than the site default) is installed."
+msgstr ""
+
+#: admin/views/settings-users.php:17
+msgid "Administrators can change another user's choice on that user's Edit User screen, and reset several users at once from Users → All Users with the \"Reset selected users' themes\" bulk action."
+msgstr ""
+
+#: admin/views/settings-users.php:18
+msgid "A saved choice is a preference, not a permission: it is re-validated on every request against the user's current roles and the installed themes. Preferences that become invalid are ignored (the default theme is used) but kept, so they apply again if they become valid."
+msgstr ""
+
+#: admin/views/settings-users.php:21
+msgid "Open my profile"
+msgstr ""
+
+#: admin/views/settings-users.php:22
+msgid "View users"
+msgstr ""
+
+#: admin/views/settings-users.php:27
+#: admin/views/settings-users.php:48
+msgid "Reset All User Theme Preferences"
+msgstr ""
+
+#. translators: %d: Number of users.
+#: admin/views/settings-users.php:33
+#, php-format
+msgid "%d user currently has a saved theme preference."
+msgid_plural "%d users currently have a saved theme preference."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/views/settings-users.php:45
+msgid "I understand this permanently deletes every user's saved theme preference."
+msgstr ""
+
+#: includes/class-floating-button.php:149
+msgid "You must be logged in to change your theme."
+msgstr ""
+
+#: includes/class-preview.php:133
+msgid "You must be logged in to choose a theme."
+msgstr ""
+
+#: includes/class-preview.php:139
+msgid "That theme is not available for your account."
+msgstr ""
+
+#. translators: %s: Parent theme name.
+#: includes/class-theme-manager.php:149
+#, php-format
+msgid "Child of %s"
+msgstr ""
+
+#: includes/class-user-profile.php:164
+msgid "Your theme preference could not be saved. Please try again."
+msgstr ""
+
+#: includes/class-user-profile.php:181
+msgid "The selected theme is not available for this account. The theme preference was not changed."
+msgstr ""
+
+#: includes/class-users-list.php:77
+msgid "Selected Theme"
+msgstr ""
+
+#. translators: %s: Theme name.
+#: includes/class-users-list.php:133
+#, php-format
+msgid "(saved: %s, now the site default)"
+msgstr ""
+
+#. translators: %s: Theme name.
+#: includes/class-users-list.php:137
+#, php-format
+msgid "(switching disabled; saved: %s)"
+msgstr ""
+
+#. translators: %s: Theme name.
+#: includes/class-users-list.php:142
+#, php-format
+msgid "(Invalid Selection: %s — role not eligible)"
+msgstr ""
+
+#. translators: %s: Theme name.
+#: includes/class-users-list.php:147
+#, php-format
+msgid "(Invalid Selection: %s — not permitted for role)"
+msgstr ""
+
+#. translators: %s: Theme directory.
+#: includes/class-users-list.php:152
+#, php-format
+msgid "(Invalid Selection: %s — theme not installed)"
+msgstr ""
+
+#: includes/class-users-list.php:213
+msgid "Reset selected users' themes"
+msgstr ""
+
+#: includes/class-users-list.php:236
+msgid "Sorry, you are not allowed to edit users."
+msgstr ""
+
+#. translators: %d: Number of users.
+#: includes/class-users-list.php:274
+#, php-format
+msgid "Theme preference reset for %d user."
+msgid_plural "Theme preferences reset for %d users."
+msgstr[0] ""
+msgstr[1] ""

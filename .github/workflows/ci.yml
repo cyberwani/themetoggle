@@ -1,0 +1,172 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  php-lint:
+    name: PHP ${{ matrix.php }} syntax
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 7.4 = "Requires PHP"; it catches PHP 8-only syntax that PHPCompatibility 9.x cannot see.
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Lint PHP files
+        run: composer lint
+
+  phpcs:
+    name: PHPCS (WordPress + PHP compatibility)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: cs2pr
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Run PHPCS
+        shell: bash
+        run: vendor/bin/phpcs -q --report=checkstyle | cs2pr
+
+  assets:
+    name: JS, CSS and Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Lint JavaScript
+        run: npm run lint:js
+
+      - name: Lint CSS
+        run: npm run lint:css
+
+      - name: Lint Markdown
+        run: npm run lint:md
+
+  i18n:
+    name: Translation template up to date
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Compare POT strings with the source
+        run: composer pot:check
+
+  e2e:
+    name: E2E (WP ${{ matrix.wp }}, PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    needs: [php-lint, phpcs]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # The suite's fixtures need Twenty Twenty-Five, so 6.7 is the oldest WordPress it can run on.
+          - wp: '6.7'
+            php: '7.4'
+          - wp: latest
+            php: '8.3'
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      TT_WP_PATH: ${{ github.workspace }}/../wordpress
+      TT_BASE: http://127.0.0.1:8899
+      TT_WP_CLI: wp
+      TT_JAR: ${{ github.workspace }}/../cookies
+      WP_VERSION: ${{ matrix.wp }}
+      DB_NAME: wordpress
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_HOST: 127.0.0.1:3306
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          extensions: mysqli
+          tools: wp-cli
+
+      - name: Install WordPress
+        run: bash tests/e2e/ci-install-wordpress.sh
+
+      - name: Prepare test site
+        run: bash tests/e2e/setup.sh
+
+      - name: Start PHP server
+        run: |
+          php -S 127.0.0.1:8899 -t "$TT_WP_PATH" > "$RUNNER_TEMP/php-server.log" 2>&1 &
+          for i in $(seq 1 30); do
+            curl -sf -o /dev/null "$TT_BASE/" && exit 0
+            sleep 1
+          done
+          echo "PHP server did not start" >&2
+          exit 1
+
+      - name: Run end-to-end tests
+        run: bash tests/e2e/http-tests.sh
+
+      - name: Upload logs
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: e2e-logs-wp${{ matrix.wp }}-php${{ matrix.php }}
+          path: |
+            ${{ env.TT_WP_PATH }}/wp-content/debug.log
+            ${{ runner.temp }}/php-server.log
+          if-no-files-found: ignore

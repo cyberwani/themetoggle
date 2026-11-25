@@ -1,0 +1,184 @@
+/* ThemeToggle admin styles: settings page and profile selector. */
+.tt-callout {
+	margin-top: 10px;
+	padding: 8px 12px;
+	border-left: 4px solid #72aee6;
+	background: #f6f7f7;
+	max-width: 760px;
+}
+
+.tt-callout ul {
+	list-style: disc;
+	margin-left: 1.5em;
+}
+
+.tt-default-theme {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+}
+
+.tt-default-theme p {
+	margin: 0 0 6px;
+}
+
+.tt-default-theme__shot {
+	width: 200px;
+	height: auto;
+	border: 1px solid #dcdcde;
+}
+
+.tt-role-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 24px;
+	margin: 12px 0 24px;
+}
+
+.tt-role-list code {
+	font-size: 11px;
+}
+
+.tt-role-table {
+	margin-top: 12px;
+}
+
+.tt-role-table__role {
+	width: 180px;
+	vertical-align: top;
+}
+
+.tt-role-table__role strong {
+	display: block;
+	margin-bottom: 4px;
+}
+
+.tt-role-table__tools {
+	display: block;
+	margin-top: 8px;
+	font-weight: 400;
+}
+
+.tt-badge {
+	display: inline-block;
+	padding: 1px 8px;
+	border-radius: 10px;
+	font-size: 11px;
+	font-weight: 400;
+}
+
+.tt-badge--on {
+	background: #d1e4dd;
+	color: #00450c;
+}
+
+.tt-badge--off {
+	background: #f0f0f1;
+	color: #50575e;
+}
+
+.tt-theme-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 10px;
+}
+
+.tt-theme-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding: 6px;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	background: #fff;
+	cursor: pointer;
+}
+
+.tt-theme-card:has(input:checked) {
+	border-color: #2271b1;
+	box-shadow: 0 0 0 1px #2271b1;
+}
+
+.tt-theme-card input {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	margin: 0;
+}
+
+.tt-theme-card__shot {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	background: #f0f0f1;
+}
+
+.tt-theme-card__name {
+	font-weight: 600;
+}
+
+.tt-theme-card__slug {
+	font-size: 11px;
+	word-break: break-all;
+}
+
+.tt-theme-card__meta {
+	font-size: 11px;
+	color: #646970;
+}
+
+/* Profile selector. */
+.tt-theme-choices {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 12px;
+	max-width: 900px;
+	margin-top: 8px;
+}
+
+.tt-theme-choice {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: 8px;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	background: #fff;
+	cursor: pointer;
+}
+
+.tt-theme-choice:has(input:checked) {
+	border-color: #2271b1;
+	box-shadow: 0 0 0 1px #2271b1;
+}
+
+.tt-theme-choice__shot {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	background: #f0f0f1;
+}
+
+.tt-theme-choice__body {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.tt-theme-choice__name {
+	font-weight: 600;
+}
+
+.tt-theme-choice__meta {
+	font-size: 12px;
+	color: #646970;
+}
+
+.tt-theme-choice__preview {
+	font-size: 12px;
+}
+
+.tt-reset-all {
+	max-width: 640px;
+}

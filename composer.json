@@ -1,0 +1,65 @@
+{
+	"name": "themetoggle/themetoggle",
+	"description": "Enable user-specific WordPress themes with role-based permissions and personalized theme switching.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"plugin",
+		"theme-switcher",
+		"user-theme",
+		"roles"
+	],
+	"require": {
+		"php": ">=7.4"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"php-parallel-lint/php-parallel-lint": "^1.4",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+		"wp-cli/i18n-command": "^2.6",
+		"wp-coding-standards/wpcs": "^3.1"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+		"platform": {
+			"php": "7.4"
+		},
+		"sort-packages": true,
+		"optimize-autoloader": true
+	},
+	"scripts": {
+		"lint": "parallel-lint --exclude vendor --exclude node_modules --exclude build .",
+		"phpcs": "phpcs",
+		"phpcbf": "phpcbf",
+		"phpcs:report": "phpcs --report=summary",
+		"make-pot": "wp i18n make-pot . languages/themetoggle.pot --slug=themetoggle --domain=themetoggle --exclude=vendor,node_modules,tests,build,docs,bin",
+		"pot:check": "bash bin/check-pot.sh",
+		"version:check": "bash bin/check-version.sh",
+		"check": [
+			"@lint",
+			"@phpcs"
+		],
+		"build": [
+			"@check",
+			"@make-pot"
+		],
+		"test:e2e": "bash tests/e2e/http-tests.sh",
+		"zip": "git archive --format=zip --prefix=themetoggle/ --output=build/themetoggle.zip HEAD"
+	},
+	"scripts-descriptions": {
+		"lint": "PHP syntax check of every PHP file.",
+		"phpcs": "WordPress Coding Standards + PHP 7.4 compatibility (phpcs.xml.dist).",
+		"phpcbf": "Auto-fix the PHPCS violations that can be fixed automatically.",
+		"phpcs:report": "PHPCS summary per file.",
+		"make-pot": "Regenerate languages/themetoggle.pot.",
+		"pot:check": "Fail if the POT file is missing strings from the source (CI).",
+		"version:check": "Check that all version numbers agree; pass a version to compare against.",
+		"check": "All static checks (lint + PHPCS + compatibility).",
+		"build": "Static checks, then regenerate the POT file.",
+		"test:e2e": "End-to-end HTTP tests against a disposable site (see tests/e2e/README.md).",
+		"zip": "Release zip from the last git commit; dev files are excluded via .gitattributes export-ignore."
+	}
+}

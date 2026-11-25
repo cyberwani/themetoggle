@@ -1,0 +1,32 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Build output
+/build/
+*.zip
+
+# Local tool configuration
+phpcs.xml
+.phpcs.xml
+.phpcs-cache
+.eslintcache
+.stylelintcache
+npm-debug.log*
+
+# Editors and OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Agent-local settings written by Claude Code if it is used here
+# (shared agent docs live in docs/ai/ and ARE committed)
+.claude/settings.local.json
+
+# Environment and secrets
+.env
+.env.*

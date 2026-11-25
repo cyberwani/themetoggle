@@ -1,0 +1,23 @@
+# Files excluded by `wp dist-archive .` (WP-CLI dist-archive-command).
+# Keep in sync with "export-ignore" in .gitattributes and "files" in package.json.
+/.git
+/.github
+/bin
+/build
+/docs
+/node_modules
+/tests
+/vendor
+.distignore
+.editorconfig
+.gitattributes
+.gitignore
+.nvmrc
+AGENTS.md
+CLAUDE.md
+README.md
+composer.json
+composer.lock
+package.json
+package-lock.json
+phpcs.xml.dist

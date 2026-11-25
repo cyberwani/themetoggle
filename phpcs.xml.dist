@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<ruleset name="ThemeToggle">
+	<description>WordPress Coding Standards and PHP 7.4+ compatibility for ThemeToggle.</description>
+
+	<file>.</file>
+	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/node_modules/*</exclude-pattern>
+	<exclude-pattern>/build/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="parallel" value="8"/>
+	<arg value="sp"/>
+
+	<!-- Coding standards. -->
+	<rule ref="WordPress"/>
+
+	<config name="minimum_wp_version" value="5.9"/>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="themetoggle"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!--
+	The spec prefix is "tt", but WPCS rejects prefixes shorter than 3 characters.
+	Stored keys keep tt_ (they are not checked here); PHP globals and hooks use
+	the ThemeToggle namespace or the themetoggle_ prefix.
+	-->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="ThemeToggle"/>
+				<element value="themetoggle"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- PHP compatibility: must match "Requires PHP" in the plugin header. -->
+	<config name="testVersion" value="7.4-"/>
+	<rule ref="PHPCompatibilityWP"/>
+</ruleset>

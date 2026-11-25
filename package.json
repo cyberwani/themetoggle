@@ -1,0 +1,48 @@
+{
+	"name": "themetoggle",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Enable user-specific WordPress themes with role-based permissions and personalized theme switching.",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"wordpress-plugin",
+		"theme-switcher",
+		"user-theme",
+		"roles"
+	],
+	"engines": {
+		"node": ">=22.22.2",
+		"npm": ">=10"
+	},
+	"files": [
+		"themetoggle.php",
+		"uninstall.php",
+		"readme.txt",
+		"admin",
+		"assets",
+		"includes",
+		"languages"
+	],
+	"dependencies": {},
+	"devDependencies": {
+		"@wordpress/scripts": "^37.2.0"
+	},
+	"scripts": {
+		"lint": "npm run lint:js && npm run lint:css && npm run lint:php",
+		"lint:js": "wp-scripts lint-js assets/js",
+		"lint:css": "wp-scripts lint-style \"assets/css/**/*.css\"",
+		"lint:php": "composer run-script check",
+		"lint:md": "wp-scripts lint-md-docs \"*.md\" \"docs/**/*.md\" \"tests/**/*.md\"",
+		"fix": "npm run fix:js && npm run fix:css && npm run fix:php",
+		"fix:js": "wp-scripts lint-js assets/js --fix",
+		"fix:css": "wp-scripts lint-style \"assets/css/**/*.css\" --fix",
+		"fix:php": "composer run-script phpcbf",
+		"format": "wp-scripts format assets/js",
+		"makepot": "composer run-script make-pot",
+		"test:e2e": "composer run-script test:e2e",
+		"build": "npm run lint && npm run makepot && npm run plugin-zip",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"packages-update": "wp-scripts packages-update"
+	}
+}
