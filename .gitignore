@@ -4,6 +4,7 @@
 
 # Build output
 /build/
+/Claude outputs/
 *.zip
 
 # Local tool configuration
