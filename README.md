@@ -38,7 +38,7 @@ The plugin has no runtime dependencies: nothing needs `composer install` or `npm
 
 ### For development
 
-Requirements: PHP 7.4+, [Composer](https://getcomposer.org/) 2, Node.js 22.22.2+ (see `.nvmrc`) with npm 10+, Git, Bash (Git Bash on Windows).
+Requirements: PHP 7.4+ with the zip extension (on by default in WAMP), [Composer](https://getcomposer.org/) 2, Node.js 22.22.2+ (see `.nvmrc`) with npm 10+, and Git. Bash is only needed for the e2e suite (Git Bash or WSL on Windows).
 
 ```bash
 git clone <repository-url> themetoggle
@@ -70,7 +70,7 @@ All commands work in Windows `cmd` and PowerShell. They call PHP, Node and Git d
 | Check the POT has every source string | `composer pot:check` | — |
 | Check all version numbers agree | `composer version:check` (optionally `-- 1.0.1`) | — |
 | Release zip → `build/themetoggle.zip` | `composer zip` (last git commit) or `composer zip:local` (working tree) | `npm run plugin-zip` (working tree, same as `zip:local`) |
-| Full build | `composer build` (checks + POT) | `npm run build` (lint + POT + zip) |
+| Full build | `composer build` (checks + regenerate POT) | `npm run build` (lint + regenerate POT + zip of the working tree) |
 | End-to-end tests | `composer test:e2e` | `npm run test:e2e` |
 | Update `@wordpress/scripts` | — | `npm run packages-update` |
 
@@ -210,7 +210,7 @@ The e2e job uses `tests/e2e/ci-install-wordpress.sh` to build the throwaway site
 5. Tag and push: `git tag v1.0.1 && git push origin v1.0.1`. The Release workflow builds and publishes the zip.
 6. Install the zip from the GitHub Release on a clean site and smoke-test the manual checklist.
 
-Without GitHub: `composer zip` (from the last commit) or `npm run plugin-zip` (from the working tree). Both write `build/themetoggle.zip` with the same files.
+Without GitHub: `composer zip` (from the last commit) or `npm run plugin-zip` (from the working tree). Both write `build/themetoggle.zip` with the same list of files, but the contents match only when everything is committed: `composer zip` ignores uncommitted changes, while `npm run build` regenerates `languages/themetoggle.pot` (new timestamp, and line numbers can differ between WP-CLI versions) and packs your current files. Commit first, including the regenerated POT, if both zips must be identical.
 
 ## Known limitations
 
