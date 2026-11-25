@@ -199,6 +199,8 @@ PHP compatibility note: PHPCompatibilityWP 2.x flags features missing in PHP 7.4
 | `.github/workflows/release.yml` | Pushing a tag `vX.Y.Z` | Runs all of CI, checks the tag matches every version number, builds `themetoggle-X.Y.Z.zip` with `git archive`, publishes a GitHub Release with the zip and generated notes |
 | `.github/dependabot.yml` | Weekly | Grouped update PRs for Composer and npm dev tools, and for the Actions used |
 
+Step-by-step repository setup (first push, settings, required checks, releases): [docs/github-ci-setup.md](docs/github-ci-setup.md).
+
 The e2e job uses `tests/e2e/ci-install-wordpress.sh` to build the throwaway site; the same script works locally with a MySQL database. On failure, `debug.log` and the PHP server log are attached to the run as an artifact.
 
 ## Release checklist
