@@ -47,7 +47,10 @@
 			"@make-pot"
 		],
 		"test:e2e": "bash tests/e2e/http-tests.sh",
-		"zip": "git archive --format=zip --prefix=themetoggle/ --output=build/themetoggle.zip HEAD"
+		"zip": [
+			"@php -r \"is_dir('build') || mkdir('build');\"",
+			"git archive --format=zip --prefix=themetoggle/ --output=build/themetoggle.zip HEAD"
+		]
 	},
 	"scripts-descriptions": {
 		"lint": "PHP syntax check of every PHP file.",
