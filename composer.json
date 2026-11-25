@@ -35,9 +35,9 @@
 		"phpcs": "phpcs",
 		"phpcbf": "phpcbf",
 		"phpcs:report": "phpcs --report=summary",
-		"make-pot": "wp i18n make-pot . languages/themetoggle.pot --slug=themetoggle --domain=themetoggle --exclude=vendor,node_modules,tests,build,docs,bin",
-		"pot:check": "bash bin/check-pot.sh",
-		"version:check": "bash bin/check-version.sh",
+		"make-pot": "@php vendor/wp-cli/wp-cli/php/boot-fs.php i18n make-pot . languages/themetoggle.pot --slug=themetoggle --domain=themetoggle --exclude=vendor,node_modules,tests,build,docs,bin",
+		"pot:check": "@php bin/check-pot.php",
+		"version:check": "@php bin/check-version.php",
 		"check": [
 			"@lint",
 			"@phpcs"
@@ -50,7 +50,8 @@
 		"zip": [
 			"@php -r \"is_dir('build') || mkdir('build');\"",
 			"git archive --format=zip --prefix=themetoggle/ --output=build/themetoggle.zip HEAD"
-		]
+		],
+		"zip:local": "@php bin/build-zip.php"
 	},
 	"scripts-descriptions": {
 		"lint": "PHP syntax check of every PHP file.",
@@ -62,7 +63,8 @@
 		"version:check": "Check that all version numbers agree; pass a version to compare against.",
 		"check": "All static checks (lint + PHPCS + compatibility).",
 		"build": "Static checks, then regenerate the POT file.",
-		"test:e2e": "End-to-end HTTP tests against a disposable site (see tests/e2e/README.md).",
-		"zip": "Release zip from the last git commit; dev files are excluded via .gitattributes export-ignore."
+		"test:e2e": "End-to-end HTTP tests against a disposable site; needs bash (Git Bash/WSL on Windows). See tests/e2e/README.md.",
+		"zip": "Release zip from the last git commit; dev files are excluded via .gitattributes export-ignore.",
+		"zip:local": "Release zip from the working tree (no commit needed); same contents as zip."
 	}
 }

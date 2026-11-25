@@ -42,7 +42,7 @@
 		"makepot": "composer run-script make-pot",
 		"test:e2e": "composer run-script test:e2e",
 		"build": "npm run lint && npm run makepot && npm run plugin-zip",
-		"plugin-zip": "wp-scripts plugin-zip",
+		"plugin-zip": "composer run-script zip:local",
 		"packages-update": "wp-scripts packages-update"
 	}
 }

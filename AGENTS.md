@@ -23,7 +23,8 @@ composer make-pot                  # regenerate languages/themetoggle.pot after 
 composer pot:check                 # fails if the POT is missing source strings (CI runs this)
 composer version:check             # all version numbers agree (the release workflow runs this)
 composer test:e2e                  # end-to-end suite — disposable site only (tests/e2e/README.md)
-npm run plugin-zip                 # release zip
+npm run plugin-zip                 # build/themetoggle.zip from the working tree (= composer zip:local)
+composer zip                       # build/themetoggle.zip from the last commit (what the release workflow ships)
 ```
 
 If a tool cannot be installed in your environment, say so in your report. Never claim a check passed unless you ran it and saw the output.

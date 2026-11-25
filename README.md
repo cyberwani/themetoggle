@@ -53,6 +53,8 @@ Clone it straight into `wp-content/plugins/` of a local site (for example WAMP's
 
 Every check can be run through Composer or npm; npm scripts that touch PHP delegate to Composer.
 
+All commands work in Windows `cmd` and PowerShell. They call PHP, Node and Git directly, and WP-CLI runs through PHP (`vendor/wp-cli/wp-cli/php/boot-fs.php`), so no Unix shell is needed. The one exception is the e2e suite (`composer test:e2e`), which needs bash: Git Bash or WSL on Windows.
+
 | Task | Composer | npm |
 | --- | --- | --- |
 | PHP syntax check | `composer lint` | — |
@@ -67,7 +69,7 @@ Every check can be run through Composer or npm; npm scripts that touch PHP deleg
 | Regenerate `languages/themetoggle.pot` | `composer make-pot` | `npm run makepot` |
 | Check the POT has every source string | `composer pot:check` | — |
 | Check all version numbers agree | `composer version:check` (optionally `-- 1.0.1`) | — |
-| Release zip | `composer zip` (from the last git commit) | `npm run plugin-zip` (from the working tree) |
+| Release zip → `build/themetoggle.zip` | `composer zip` (last git commit) or `composer zip:local` (working tree) | `npm run plugin-zip` (working tree, same as `zip:local`) |
 | Full build | `composer build` (checks + POT) | `npm run build` (lint + POT + zip) |
 | End-to-end tests | `composer test:e2e` | `npm run test:e2e` |
 | Update `@wordpress/scripts` | — | `npm run packages-update` |
@@ -78,8 +80,8 @@ There is no compile step. `assets/js/admin.js` and the two CSS files are small, 
 
 Only the runtime files: `themetoggle.php`, `uninstall.php`, `readme.txt`, `admin/`, `assets/`, `includes/`, `languages/`. Three lists define this and must stay in sync:
 
-- `files` in `package.json` (used by `npm run plugin-zip`; npm always adds `README.md` and `package.json` as well, which is harmless — use `composer zip` for an exact runtime-only zip)
-- `export-ignore` entries in `.gitattributes` (used by `composer zip`)
+- `files` in `package.json` (used by `composer zip:local` / `npm run plugin-zip`, through `bin/build-zip.php`; needs the PHP zip extension, which WAMP enables by default)
+- `export-ignore` entries in `.gitattributes` (used by `composer zip` and the release workflow)
 - `.distignore` (used by `wp dist-archive .` if you use WP-CLI's dist-archive command)
 
 ## Project structure
@@ -111,7 +113,7 @@ themetoggle/
 ├── assets/                       css/admin.css, css/frontend.css, js/admin.js
 ├── languages/themetoggle.pot
 ├── tests/e2e/                    HTTP end-to-end suite, fixture themes, CI WordPress installer
-├── bin/                          check-version.sh, check-pot.sh (CI helpers)
+├── bin/                          build-zip.php, check-version.php, check-pot.php (build/CI helpers, run with PHP)
 ├── .github/                      CI and release workflows, Dependabot
 └── docs/                         ARCHITECTURE.md, TESTING.md
 ```
@@ -208,7 +210,7 @@ The e2e job uses `tests/e2e/ci-install-wordpress.sh` to build the throwaway site
 5. Tag and push: `git tag v1.0.1 && git push origin v1.0.1`. The Release workflow builds and publishes the zip.
 6. Install the zip from the GitHub Release on a clean site and smoke-test the manual checklist.
 
-Without GitHub: `composer zip` (from the last commit) or `npm run plugin-zip` (from the working tree).
+Without GitHub: `composer zip` (from the last commit) or `npm run plugin-zip` (from the working tree). Both write `build/themetoggle.zip` with the same files.
 
 ## Known limitations
 

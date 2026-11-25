@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Verify tag matches the plugin version
-        run: bash bin/check-version.sh "${GITHUB_REF_NAME#v}"
+        run: php bin/check-version.php "${GITHUB_REF_NAME#v}"
 
       - name: Build zip
         run: |
