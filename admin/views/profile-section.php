@@ -20,15 +20,6 @@ $tt_default = $view['default'];
 		<th scope="row"><?php esc_html_e( 'Choose Your Website Theme', 'themetoggle' ); ?></th>
 		<td>
 			<?php wp_nonce_field( 'tt_save_user_theme_' . $tt_user->ID, 'tt_user_theme_nonce' ); ?>
-			<p class="description">
-				<?php
-				if ( $view['is_self'] ) {
-					esc_html_e( 'The selected theme applies only to your own logged-in sessions. Visitors and other users keep seeing the site default theme.', 'themetoggle' );
-				} else {
-					esc_html_e( 'The selected theme applies only to this user\'s logged-in sessions.', 'themetoggle' );
-				}
-				?>
-			</p>
 			<p>
 				<strong><?php esc_html_e( 'Current Selection:', 'themetoggle' ); ?></strong>
 				<?php echo esc_html( $view['current'] ); ?>
@@ -107,6 +98,15 @@ $tt_default = $view['default'];
 					</label>
 				<?php endforeach; ?>
 			</fieldset>
+			<p class="description">
+				<?php
+				if ( $view['is_self'] ) {
+					esc_html_e( 'The selected theme applies only to your own logged-in sessions. Visitors and other users keep seeing the site default theme.', 'themetoggle' );
+				} else {
+					esc_html_e( 'The selected theme applies only to this user\'s logged-in sessions.', 'themetoggle' );
+				}
+				?>
+			</p>
 		</td>
 	</tr>
 </table>
