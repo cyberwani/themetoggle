@@ -29,6 +29,7 @@ flowchart TD
     User_Profile --> Theme_Resolver
     User_Profile --> Preview
     Users_List --> Theme_Resolver
+    Users_List --> Settings
     Admin["Admin\\Admin"] --> Settings
 ```
 
@@ -50,7 +51,7 @@ flowchart TD
 | `Data_Guard` | Theme-mod isolation, `sidebars_widgets` write block | `pre_option_theme_mods_{default}`, `pre_update_option_*` |
 | `User_Profile` | Profile section render + save + error reporting | `show_user_profile`, `edit_user_profile`, `personal_options_update`, `edit_user_profile_update`, `user_profile_update_errors` |
 | `Floating_Button` | Button / preview bar, reset handler | `wp_footer`, `admin_footer`, `admin_post_tt_reset_theme` |
-| `Users_List` | Column, sort, bulk reset, notice | `manage_users_*`, `pre_get_users`, `bulk_actions-users`, `handle_bulk_actions-users` |
+| `Users_List` | Column and sort (only when `show_users_column` is on), bulk reset, notice | `manage_users_*`, `pre_get_users`, `bulk_actions-users`, `handle_bulk_actions-users` |
 | `Admin\Admin` | Settings page, tabs, assets, reset-all | `admin_menu`, `admin_enqueue_scripts`, `admin_post_tt_reset_all` |
 | `Redirect` | Same-site redirect target for every POST handler | — |
 

@@ -78,7 +78,7 @@ class Plugin {
 
 		if ( is_admin() ) {
 			$profile = new User_Profile( $settings, $resolver, $themes, $preview );
-			$users   = new Users_List( $resolver, $themes );
+			$users   = new Users_List( $settings, $resolver, $themes );
 			$admin   = new Admin( $settings, $themes, $roles );
 
 			$profile->register_hooks();

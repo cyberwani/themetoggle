@@ -22,7 +22,7 @@ Features:
 * Parent and child themes are both selectable; child themes load their parent template correctly.
 * "Personal Theme Settings" on the profile screen, with a "Default Theme" option and a single-page preview before saving.
 * Floating "Switch to Default Theme" button (position, label, colours, radius, size, icon), frontend and/or admin.
-* "Selected Theme" column on Users → All Users that distinguishes the saved preference from the effective theme, sortable, with a bulk reset action.
+* "Selected Theme" column on Users → All Users that distinguishes the saved preference from the effective theme, sortable, with a bulk reset action. The column can be hidden site-wide from General Settings.
 * "Reset All User Theme Preferences" tool.
 
 == Installation ==
@@ -30,7 +30,7 @@ Features:
 1. Copy the `themetoggle` folder to `wp-content/plugins/`.
 2. Activate ThemeToggle under Plugins.
 3. Go to Appearance → ThemeToggle:
-   * General Settings: leave "Enable Theme Switching" on; enable admin switching only if you need it (see below).
+   * General Settings: leave "Enable Theme Switching" on; enable admin switching only if you need it (see below); untick "Users List Column" to hide the "Selected Theme" column.
    * Role-Based Themes: tick the roles allowed to switch, then tick the themes each role may use.
    * Floating Button: adjust the reset button if wanted.
 4. Eligible users choose a theme under Users → Profile → Personal Theme Settings.

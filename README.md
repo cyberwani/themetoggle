@@ -19,7 +19,7 @@ Per-user WordPress themes with role-based permissions. Administrators choose whi
 - Parent and child themes are both selectable; a child theme loads its parent template.
 - "Personal Theme Settings" on the profile screen, with a "Default Theme" option and a one-page preview before saving.
 - Floating "Switch to Default Theme" button (position, label, colours, radius, size, icon), on the frontend and/or in wp-admin.
-- "Selected Theme" column in Users → All Users that separates the saved preference from the effective theme, sortable, with a bulk reset.
+- "Selected Theme" column in Users → All Users that separates the saved preference from the effective theme, sortable, with a bulk reset. The column can be switched off site-wide in General Settings (the bulk reset stays).
 - "Reset All User Theme Preferences" tool.
 
 ## Installation
@@ -29,7 +29,7 @@ Per-user WordPress themes with role-based permissions. Administrators choose whi
 1. Copy the plugin to `wp-content/plugins/themetoggle/` (or upload the release zip in Plugins → Add New → Upload).
 2. Activate **ThemeToggle**.
 3. Open **Appearance → ThemeToggle**:
-   - **General Settings** — keep "Enable Theme Switching" on. Turn on admin switching only if needed (see [Admin switching](#admin-switching)).
+   - **General Settings** — keep "Enable Theme Switching" on. Turn on admin switching only if needed (see [Admin switching](#admin-switching)). Untick "Users List Column" to hide the "Selected Theme" column from Users → All Users.
    - **Role-Based Themes** — tick the roles allowed to switch, then the themes each role may use.
    - **Floating Button** — adjust the reset button.
 4. Eligible users choose a theme in **Users → Profile → Personal Theme Settings**.

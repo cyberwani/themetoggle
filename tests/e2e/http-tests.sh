@@ -227,6 +227,34 @@ BN=$(grep -o 'name="_wpnonce" value="[^"]*"' <<<"$U" | head -1 | sed 's/.*value=
 get admin "$BASE/wp-admin/users.php?action=tt_reset_theme&users[]=$EID&users[]=$AID&_wpnonce=$BN" -o /dev/null -e "$BASE/wp-admin/users.php"
 check "bulk reset clears selected users" "$(meta editor1)$(meta author1)" ""
 
+echo "== Users list column switch"
+save_general() { # extra form fields...
+	local html nonce
+	html=$(get admin "$BASE/wp-admin/themes.php?page=themetoggle&tab=general")
+	nonce=$(grep -o 'name="_wpnonce" value="[^"]*"' <<<"$html" | head -1 | sed 's/.*value="//; s/"//')
+	get admin "$BASE/wp-admin/options.php" -o /dev/null -e "$BASE/wp-admin/themes.php?page=themetoggle&tab=general" \
+		-d option_page=tt_settings_group -d action=update -d "_wpnonce=$nonce" -d "tt_settings[_tab]=general" \
+		-d "tt_settings[enabled]=1" "$@"
+}
+set_settings "$SETTINGS_BASE"
+patch_settings '{"button_label":"Keep me too"}'
+G=$(get admin "$BASE/wp-admin/themes.php?page=themetoggle&tab=general")
+contains "general tab: column option shown" "$G" 'name="tt_settings\[show_users_column\]"'
+contains "general tab: column option on by default" "$G" "show_users_column\]\" value=\"1\" *checked="
+save_general
+check "general tab saved with box unticked: setting off" "$($WP eval 'echo var_export( get_option( "tt_settings" )["show_users_column"], true );')" "false"
+check "general tab save keeps other tabs' settings" "$($WP eval 'echo get_option( "tt_settings" )["button_label"];')" "Keep me too"
+U=$(get admin "$BASE/wp-admin/users.php")
+lacks "column off: no Selected Theme column" "$U" 'Selected Theme'
+lacks "column off: no sort link for it" "$U" 'orderby=tt_theme'
+contains "column off: bulk reset action still offered" "$U" 'value="tt_reset_theme"'
+check "column off: ?orderby=tt_theme is ignored and lists everyone" "$(get admin "$BASE/wp-admin/users.php?orderby=tt_theme" | grep -c 'name="users\[\]"')" "$(grep -c 'name="users\[\]"' <<<"$U")"
+lacks "column off: settings page still renders" "$(get admin "$BASE/wp-admin/themes.php?page=themetoggle&tab=general")" 'Fatal error'
+save_general -d "tt_settings[show_users_column]=1"
+check "general tab saved with box ticked: setting on" "$($WP eval 'echo var_export( get_option( "tt_settings" )["show_users_column"], true );')" "true"
+contains "column on again: Selected Theme column back" "$(get admin "$BASE/wp-admin/users.php")" 'Selected Theme'
+set_settings "$SETTINGS_BASE"
+
 echo "== Settings page"
 check "editor cannot open settings" "$(get editor1 "$BASE/wp-admin/themes.php?page=themetoggle" -o /dev/null -w '%{http_code}')" "403"
 S=$(get admin "$BASE/wp-admin/themes.php?page=themetoggle&tab=roles")

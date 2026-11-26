@@ -43,7 +43,7 @@ class Settings {
 	 * Keys owned by each settings tab. Saving a tab only touches its own keys.
 	 */
 	const TAB_KEYS = array(
-		'general' => array( 'enabled', 'enable_admin' ),
+		'general' => array( 'enabled', 'enable_admin', 'show_users_column' ),
 		'roles'   => array( 'allowed_roles', 'role_themes' ),
 		'button'  => array(
 			'show_switch_button',
@@ -114,6 +114,7 @@ class Settings {
 		return array(
 			'enabled'                     => true,
 			'enable_admin'                => false,
+			'show_users_column'           => true,
 			'allowed_roles'               => array(),
 			'role_themes'                 => array(),
 			'show_switch_button'          => true,
@@ -210,6 +211,15 @@ class Settings {
 	}
 
 	/**
+	 * Whether the "Selected Theme" column is shown in Users → All Users.
+	 *
+	 * @return bool
+	 */
+	public function is_users_column_enabled() {
+		return (bool) $this->get_clean( 'show_users_column' );
+	}
+
+	/**
 	 * Roles that may switch themes.
 	 *
 	 * @return string[]
@@ -296,6 +306,7 @@ class Settings {
 		switch ( $key ) {
 			case 'enabled':
 			case 'enable_admin':
+			case 'show_users_column':
 			case 'show_switch_button':
 			case 'show_switch_button_frontend':
 			case 'show_switch_button_admin':

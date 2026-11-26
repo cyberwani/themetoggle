@@ -27,6 +27,13 @@ class Users_List {
 	const BULK_ACTION = 'tt_reset_theme';
 
 	/**
+	 * Settings.
+	 *
+	 * @var Settings
+	 */
+	private $settings;
+
+	/**
 	 * Resolver.
 	 *
 	 * @var Theme_Resolver
@@ -43,10 +50,12 @@ class Users_List {
 	/**
 	 * Constructor.
 	 *
+	 * @param Settings       $settings Settings.
 	 * @param Theme_Resolver $resolver Resolver.
 	 * @param Theme_Manager  $themes   Theme manager.
 	 */
-	public function __construct( Theme_Resolver $resolver, Theme_Manager $themes ) {
+	public function __construct( Settings $settings, Theme_Resolver $resolver, Theme_Manager $themes ) {
+		$this->settings = $settings;
 		$this->resolver = $resolver;
 		$this->themes   = $themes;
 	}
@@ -57,11 +66,16 @@ class Users_List {
 	 * @return void
 	 */
 	public function register_hooks() {
-		add_filter( 'manage_users_columns', array( $this, 'add_column' ) );
-		add_filter( 'manage_users_custom_column', array( $this, 'render_column' ), 10, 3 );
-		add_filter( 'manage_users_sortable_columns', array( $this, 'add_sortable' ) );
-		// Late, so restrictions other plugins add to the query are already present and get merged.
-		add_action( 'pre_get_users', array( $this, 'apply_sorting' ), 99 );
+		// The column (and sorting by it) can be switched off in General Settings;
+		// the bulk reset action does not depend on the column and always stays.
+		if ( $this->settings->is_users_column_enabled() ) {
+			add_filter( 'manage_users_columns', array( $this, 'add_column' ) );
+			add_filter( 'manage_users_custom_column', array( $this, 'render_column' ), 10, 3 );
+			add_filter( 'manage_users_sortable_columns', array( $this, 'add_sortable' ) );
+			// Late, so restrictions other plugins add to the query are already present and get merged.
+			add_action( 'pre_get_users', array( $this, 'apply_sorting' ), 99 );
+		}
+
 		add_filter( 'bulk_actions-users', array( $this, 'add_bulk_action' ) );
 		add_filter( 'handle_bulk_actions-users', array( $this, 'handle_bulk_action' ), 10, 3 );
 		add_action( 'admin_notices', array( $this, 'bulk_notice' ) );

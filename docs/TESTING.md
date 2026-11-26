@@ -51,6 +51,7 @@ Use the accounts from the e2e setup or your own. ✅ = expected result.
 - [ ] Role table shows screenshots, stylesheet directory, "Child of …" and "(site default)".
 - [ ] Only roles ticked under "User Roles Allowed to Switch Themes" have a theme row; ticking or unticking a role shows or hides its row at once. Untick a role, save, tick it again: its earlier theme choices are still there. With no role ticked, a hint replaces the table.
 - [ ] Users → All Users shows "Selected Theme": theme name in bold for valid choices, "Default Theme (Invalid Selection: …)" for invalid ones; the column sorts without hiding users.
+- [ ] Unticking General Settings → "Users List Column" removes the column and its sorting; the "Reset selected users' themes" bulk action is still there. Ticking it brings the column back.
 - [ ] Bulk action "Reset selected users' themes" clears only the ticked users.
 - [ ] Editing another user's profile shows that user's permitted themes only.
 - [ ] Reset All requires the checkbox and a confirm dialog.

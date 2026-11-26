@@ -53,6 +53,16 @@ $tt_parent   = $view['themes']->get_parent_label( $tt_default );
 			</td>
 		</tr>
 		<tr>
+			<th scope="row"><?php esc_html_e( 'Users List Column', 'themetoggle' ); ?></th>
+			<td>
+				<label>
+					<input type="checkbox" name="<?php echo esc_attr( Settings::OPTION_NAME ); ?>[show_users_column]" value="1" <?php checked( $tt_settings['show_users_column'] ); ?> />
+					<?php esc_html_e( 'Show the "Selected Theme" column in Users → All Users', 'themetoggle' ); ?>
+				</label>
+				<p class="description"><?php esc_html_e( 'Hiding the column also turns off sorting by it. The "Reset selected users\' themes" bulk action stays available. Each administrator can also hide the column just for themselves under Screen Options on the Users page.', 'themetoggle' ); ?></p>
+			</td>
+		</tr>
+		<tr>
 			<th scope="row"><?php esc_html_e( 'Default Theme', 'themetoggle' ); ?></th>
 			<td>
 				<div class="tt-default-theme">
