@@ -182,7 +182,10 @@ lacks "admin visibility off hides admin button" "$(get editor1 "$BASE/wp-admin/p
 set_settings "$SETTINGS_BASE"
 
 echo "== REST / AJAX context"
-RN=$(get admin "$BASE/wp-admin/index.php" | grep -o 'createNonceMiddleware( "[^"]*"' | head -1 | sed 's/.*( "//; s/"//')
+# REST nonce from core's own endpoint (WordPress 5.3+). Scraping it from admin HTML is not
+# portable: WordPress 6.7 does not print createNonceMiddleware() on the Dashboard.
+RN=$(get admin "$BASE/wp-admin/admin-ajax.php?action=rest-nonce")
+if grep -qE '^[0-9a-f]{10}$' <<<"$RN"; then ok "got a REST nonce for the REST checks"; else bad "got a REST nonce for the REST checks" "admin-ajax.php?action=rest-nonce returned [$RN]"; fi
 active_via_rest() { # referer
 	get admin "$BASE/?rest_route=/wp/v2/themes&status=active&_wpnonce=$RN" ${1:+-e "$1"} | grep -o '"stylesheet":"[^"]*"' | head -1 | sed 's/.*:"//; s/"//'
 }

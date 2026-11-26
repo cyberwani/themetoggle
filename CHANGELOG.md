@@ -25,6 +25,7 @@ Entries name the commits they come from. User-facing changes are also summarised
 
 ### Fixed
 
+- End-to-end suite: the REST checks failed on WordPress 6.7 because the test scraped its REST nonce from Dashboard HTML that 6.7 does not print. It now uses core's `admin-ajax.php?action=rest-nonce`, and reports clearly if no nonce is obtained. This also makes the REST widget-protection check meaningful on 6.7: it had been passing only because its request was rejected.
 - The floating "Switch to Default Theme" button kept its style on sites using Elementor. Elementor's frontend CSS was overriding the button's layout, colours and spacing. ([6059ad8](https://github.com/cyberwani/themetoggle/commit/6059ad8))
 - `composer zip` failed on a fresh checkout because the `build/` folder did not exist; it is now created first. ([949a842](https://github.com/cyberwani/themetoggle/commit/949a842))
 - `phpcs.xml.dist` exclude patterns are anchored to the plugin folder. Before, a checkout under any folder named `build`, `vendor`, `node_modules` or `bin` skipped every file and reported no problems. Also fixes the PHPCS alignment warning in `includes/class-floating-button.php`. ([ead7acb](https://github.com/cyberwani/themetoggle/commit/ead7acb))

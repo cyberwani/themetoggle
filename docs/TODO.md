@@ -45,6 +45,7 @@ Last updated: 2026-11-26
 
 Add new findings here, newest first.
 
+- [x] 2026-11-26 — CI job `E2E (WP 6.7, PHP 7.4)` failed: the six REST checks got no REST nonce, because WordPress 6.7 does not print `createNonceMiddleware()` on the Dashboard. Test-only bug; the plugin was fine. The suite now takes the nonce from `admin-ajax.php?action=rest-nonce`. Reproduced and verified locally on WordPress 6.7 and 7.3-alpha (165/0 each).
 - [x] 2026-11-26 — Version bumped to 1.0.1 (plugin header, `VERSION`, `readme.txt` Stable tag and changelog, `package.json`, `package-lock.json`); `CHANGELOG.md` added from the git history since `v1.0.0`.
 - [x] 2026-11-26 — New General Settings option "Users List Column" (`show_users_column`, default on) to show or hide the "Selected Theme" column in Users → All Users. Hiding it also disables sorting by it; the bulk reset action stays. Covered by 11 e2e checks.
 - [x] 2026-11-26 — `composer phpcs` warned about an unaligned `=` in `includes/class-floating-button.php`, introduced by the security fixes. Root cause of it slipping through: `phpcs.xml.dist` excluded `/build/*` unanchored, which matched the sandbox path `/home/claude/build/…`, so PHPCS there checked no files. Patterns are now anchored to the plugin folder; warning fixed.
@@ -71,7 +72,7 @@ Add new findings here, newest first.
 
 - [x] PHPCS (WordPress standard + PHP 7.4 compatibility): 0 errors, 0 warnings.
 - [x] JS, CSS and Markdown lint clean.
-- [x] End-to-end suite: 145 checks passing on a fresh site (WordPress 7.3-alpha, PHP 8.3, SQLite).
+- [x] End-to-end suite: 165 checks passing on fresh sites with WordPress 6.7 and 7.3-alpha (PHP 8.3, SQLite).
 - [x] Security audit (2026-11-26): `bin/` scripts made CLI-only; Users-list sort keeps other plugins' `meta_query`; filter-supplied themes validated and never applied on excluded screens (a broken one could switch the site theme); button styles re-validated on output. Each fix has e2e checks that failed on the old code. Also fixed a vacuous Users-list row count in the e2e suite.
 
 ### Tooling and docs

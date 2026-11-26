@@ -22,7 +22,7 @@ php -S 127.0.0.1:8899 -t "$TT_WP_PATH" &
 composer test:e2e
 ```
 
-`home` and `siteurl` of the site must equal `TT_BASE`. Expected result: `RESULT: 145 passed, 0 failed`, and no ThemeToggle lines in `wp-content/debug.log`.
+`home` and `siteurl` of the site must equal `TT_BASE`. Expected result: `RESULT: 165 passed, 0 failed`, and no ThemeToggle lines in `wp-content/debug.log`.
 
 Fixtures:
 
