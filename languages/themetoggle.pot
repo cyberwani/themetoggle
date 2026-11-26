@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-25T18:26:00+00:00\n"
+"POT-Creation-Date: 2026-11-26T05:37:30+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: themetoggle\n"
@@ -114,7 +114,7 @@ msgstr ""
 #: admin/views/profile-section.php:74
 #: admin/views/settings-general.php:56
 #: includes/class-user-profile.php:128
-#: includes/class-users-list.php:124
+#: includes/class-users-list.php:125
 msgid "Default Theme"
 msgstr ""
 
@@ -275,7 +275,7 @@ msgid "Button label"
 msgstr ""
 
 #: admin/views/settings-interface.php:73
-#: includes/class-settings.php:224
+#: includes/class-settings.php:242
 msgid "Switch to Default Theme"
 msgstr ""
 
@@ -319,58 +319,54 @@ msgstr ""
 msgid "ThemeToggle settings sections"
 msgstr ""
 
-#: admin/views/settings-role-themes.php:28
-#: admin/views/settings-role-themes.php:32
+#: admin/views/settings-role-themes.php:29
+#: admin/views/settings-role-themes.php:33
 msgid "User Roles Allowed to Switch Themes"
 msgstr ""
 
-#: admin/views/settings-role-themes.php:29
+#: admin/views/settings-role-themes.php:30
 msgid "Only users holding at least one of these roles see the profile theme selector. All other users always get the default theme."
 msgstr ""
 
-#: admin/views/settings-role-themes.php:41
+#: admin/views/settings-role-themes.php:42
 msgid "Role-Based Theme Assignment"
 msgstr ""
 
-#: admin/views/settings-role-themes.php:42
-msgid "Choose which installed themes each role may use. Users with several eligible roles get the combined list. Assignments on roles that are not allowed above have no effect until the role is allowed."
+#: admin/views/settings-role-themes.php:43
+msgid "Choose which installed themes each allowed role may use. Users with several allowed roles get the combined list. A role appears here once it is ticked above; unticking it hides the role but keeps its themes, which apply again if the role is ticked later."
 msgstr ""
 
-#: admin/views/settings-role-themes.php:45
+#: admin/views/settings-role-themes.php:46
 msgid "No usable themes are installed."
 msgstr ""
 
-#: admin/views/settings-role-themes.php:50
+#: admin/views/settings-role-themes.php:49
+msgid "Tick at least one role under \"User Roles Allowed to Switch Themes\" to assign themes to it."
+msgstr ""
+
+#: admin/views/settings-role-themes.php:60
 msgid "User Role"
 msgstr ""
 
-#: admin/views/settings-role-themes.php:51
+#: admin/views/settings-role-themes.php:61
 msgid "Allowed Themes"
 msgstr ""
 
-#: admin/views/settings-role-themes.php:64
-msgid "Allowed"
-msgstr ""
-
-#: admin/views/settings-role-themes.php:64
-msgid "Not allowed"
-msgstr ""
-
-#: admin/views/settings-role-themes.php:67
+#: admin/views/settings-role-themes.php:74
 msgid "All"
 msgstr ""
 
-#: admin/views/settings-role-themes.php:69
+#: admin/views/settings-role-themes.php:76
 msgid "None"
 msgstr ""
 
 #. translators: %s: Role name.
-#: admin/views/settings-role-themes.php:77
+#: admin/views/settings-role-themes.php:84
 #, php-format
 msgid "Allowed themes for %s"
 msgstr ""
 
-#: admin/views/settings-role-themes.php:95
+#: admin/views/settings-role-themes.php:102
 msgid "(site default)"
 msgstr ""
 
@@ -415,7 +411,7 @@ msgstr[1] ""
 msgid "I understand this permanently deletes every user's saved theme preference."
 msgstr ""
 
-#: includes/class-floating-button.php:149
+#: includes/class-floating-button.php:150
 msgid "You must be logged in to change your theme."
 msgstr ""
 
@@ -441,50 +437,50 @@ msgstr ""
 msgid "The selected theme is not available for this account. The theme preference was not changed."
 msgstr ""
 
-#: includes/class-users-list.php:77
+#: includes/class-users-list.php:78
 msgid "Selected Theme"
 msgstr ""
 
 #. translators: %s: Theme name.
-#: includes/class-users-list.php:133
+#: includes/class-users-list.php:134
 #, php-format
 msgid "(saved: %s, now the site default)"
 msgstr ""
 
 #. translators: %s: Theme name.
-#: includes/class-users-list.php:137
+#: includes/class-users-list.php:138
 #, php-format
 msgid "(switching disabled; saved: %s)"
 msgstr ""
 
 #. translators: %s: Theme name.
-#: includes/class-users-list.php:142
+#: includes/class-users-list.php:143
 #, php-format
 msgid "(Invalid Selection: %s — role not eligible)"
 msgstr ""
 
 #. translators: %s: Theme name.
-#: includes/class-users-list.php:147
+#: includes/class-users-list.php:148
 #, php-format
 msgid "(Invalid Selection: %s — not permitted for role)"
 msgstr ""
 
 #. translators: %s: Theme directory.
-#: includes/class-users-list.php:152
+#: includes/class-users-list.php:153
 #, php-format
 msgid "(Invalid Selection: %s — theme not installed)"
 msgstr ""
 
-#: includes/class-users-list.php:213
+#: includes/class-users-list.php:225
 msgid "Reset selected users' themes"
 msgstr ""
 
-#: includes/class-users-list.php:236
+#: includes/class-users-list.php:248
 msgid "Sorry, you are not allowed to edit users."
 msgstr ""
 
 #. translators: %d: Number of users.
-#: includes/class-users-list.php:274
+#: includes/class-users-list.php:286
 #, php-format
 msgid "Theme preference reset for %d user."
 msgid_plural "Theme preferences reset for %d users."
