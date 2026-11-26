@@ -31,3 +31,7 @@ desktop.ini
 # Environment and secrets
 .env
 .env.*
+
+
+# Custom
+github-ci-config.md
