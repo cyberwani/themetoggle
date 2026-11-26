@@ -4,6 +4,35 @@ What is done, what is still open, and anything found later. Tick items as they a
 
 Last updated: 2026-11-26
 
+## Features
+
+Planned features, each with a Feature ID. The full spec of each is in `docs/features/feature-<ID>.md`; ID rules, status values and the spec template are in [`docs/features/README.md`](features/README.md). Keep this table, the spec's header and `docs/ThemeToggle feature ideas.xlsx` in step when a status changes.
+
+Recommended order: TTF001 → TTF007 → TTF002 and TTF003 → TTF010 → TTF018.
+
+| ID | Feature | Group | Effort | Risk | Status | Depends on |
+| --- | --- | --- | --- | --- | --- | --- |
+| [TTF001](features/feature-TTF001.md) | Toolbar menu (theme switcher and feature links) | Quick win | Small | Low | Idea | — |
+| [TTF002](features/feature-TTF002.md) | "Why this theme?" admin info | Quick win | Small | Low | Idea | TTF001 optional |
+| [TTF003](features/feature-TTF003.md) | Usage stats | Quick win | Small | Low | Idea | — |
+| [TTF004](features/feature-TTF004.md) | WP-CLI commands | Quick win | Small | Low | Idea | TTF005 |
+| [TTF005](features/feature-TTF005.md) | Settings import/export (JSON) | Quick win | Small | Low | Idea | — |
+| [TTF006](features/feature-TTF006.md) | Change hooks | Quick win | Small | Low | Idea | — |
+| [TTF007](features/feature-TTF007.md) | Default theme per role | Medium | Medium | Medium | Idea | — |
+| [TTF008](features/feature-TTF008.md) | Admin-assigned, locked themes | Medium | Medium | Low | Idea | — |
+| [TTF009](features/feature-TTF009.md) | Time-limited assignments | Medium | Medium | Low | Idea | TTF008 |
+| [TTF010](features/feature-TTF010.md) | Cache-plugin compatibility | Medium | Medium | Medium | Idea | — |
+| [TTF011](features/feature-TTF011.md) | Audit log | Medium | Medium | Medium | Idea | TTF006 |
+| [TTF012](features/feature-TTF012.md) | Rules beyond roles | Medium | Medium | Medium | Idea | — |
+| [TTF013](features/feature-TTF013.md) | Preview across pages | Medium | Medium | Medium | Idea | — |
+| [TTF014](features/feature-TTF014.md) | Multisite support | Larger | Large | High | Idea | — |
+| [TTF015](features/feature-TTF015.md) | Settings for non-active classic themes | Larger | Large | High | Idea | — |
+| [TTF016](features/feature-TTF016.md) | Visitor (logged-out) switching | Larger | Large | High | Idea | TTF010 |
+| [TTF017](features/feature-TTF017.md) | REST API for preferences | Larger | Medium | Medium | Idea | — |
+| [TTF018](features/feature-TTF018.md) | Shareable preview links (no login) | Larger | Large | Medium | Idea | TTF010; TTF001 optional |
+
+Next free ID: TTF019.
+
 ## Pending
 
 ### Verify
@@ -32,10 +61,10 @@ Last updated: 2026-11-26
 
 ### Improve (optional)
 
-- [ ] Multisite support: per-site user meta key, network vs site settings, tests. Not implemented; do not claim support until it is.
-- [ ] Preview across page views. It currently lasts one page; following a link returns to the saved theme.
+- [ ] Multisite support → [TTF014](features/feature-TTF014.md). Not implemented; do not claim support until it is.
+- [ ] Preview across page views (it currently lasts one page) → [TTF013](features/feature-TTF013.md).
 - [ ] Let users on a personal theme manage widgets. Writes to `sidebars_widgets` are blocked while a personal theme is applied.
-- [ ] A way to configure a classic theme's own settings (menu locations, logo) without making it the active theme once.
+- [ ] A way to configure a classic theme's own settings (menu locations, logo) without making it the active theme once → [TTF015](features/feature-TTF015.md).
 - [ ] Theme installation from the settings page, using WordPress's own installer APIs. Out of scope for 1.0.0.
 - [ ] Move to PHPCompatibility 10 when it is stable, so PHPCS also flags PHP 8-only syntax. CI's PHP 7.4 lint covers this today.
 - [ ] Compare against the Theme Test Drive 2.9.1 source; it was never provided, so the build relied on its known approach.
@@ -45,6 +74,8 @@ Last updated: 2026-11-26
 
 Add new findings here, newest first.
 
+- [x] 2026-11-26 — TTF001 widened from "Admin-bar theme switcher" to "Toolbar menu": one ThemeToggle toolbar menu with Switch theme (TTF001), Share this page… and My preview links (TTF018) and Why this theme? (TTF002, admins). Specs TTF001, TTF002 and TTF018 updated.
+- [x] 2026-11-26 — Feature IDs introduced. The 17 ideas from the feature sheet and the new shareable preview links feature are now TTF001–TTF018, each with a spec in `docs/features/`, listed under [Features](#features) and in `docs/ThemeToggle feature ideas.xlsx`. The Improve items for multisite, preview across pages and classic theme settings now point to TTF014, TTF013 and TTF015.
 - [x] 2026-11-26 — CI job `E2E (WP 6.7, PHP 7.4)` failed: the six REST checks got no REST nonce, because WordPress 6.7 does not print `createNonceMiddleware()` on the Dashboard. Test-only bug; the plugin was fine. The suite now takes the nonce from `admin-ajax.php?action=rest-nonce`. Reproduced and verified locally on WordPress 6.7 and 7.3-alpha (165/0 each).
 - [x] 2026-11-26 — Version bumped to 1.0.1 (plugin header, `VERSION`, `readme.txt` Stable tag and changelog, `package.json`, `package-lock.json`); `CHANGELOG.md` added from the git history since `v1.0.0`.
 - [x] 2026-11-26 — New General Settings option "Users List Column" (`show_users_column`, default on) to show or hide the "Selected Theme" column in Users → All Users. Hiding it also disables sorting by it; the bulk reset action stays. Covered by 11 e2e checks.

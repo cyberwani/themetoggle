@@ -11,7 +11,7 @@ Read first: `AGENTS.md` (rules, conventions) and `docs/ARCHITECTURE.md` (lifecyc
 
 ## Workflow
 
-1. **Ground truth.** Read the files involved (see the map in `AGENTS.md`). Do not assume APIs, hooks or settings exist; check the code. For WordPress core behaviour, read core source when it matters (for example how `get_theme_mods()` picks its option).
+1. **Ground truth.** Read the files involved (see the map in `AGENTS.md`). Do not assume APIs, hooks or settings exist; check the code. For WordPress core behaviour, read core source when it matters (for example how `get_theme_mods()` picks its option). If the work is a planned feature (ID `TTF…` in `docs/TODO.md`), read `docs/features/feature-<ID>.md` and follow "Features with an ID" in `AGENTS.md`.
 2. **State the gap.** Write down CURRENT STATE, REQUIRED STATE and the GAP in one or two lines each. Treat the requester's proposed solution as a hypothesis; propose a safer or simpler one if it exists.
 3. **Check the invariants** in `docs/ARCHITECTURE.md`. If the request breaks one, stop and explain; do not implement silently.
 4. **Pick the recipe** below, or the closest one.

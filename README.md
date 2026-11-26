@@ -115,7 +115,7 @@ themetoggle/
 ├── tests/e2e/                    HTTP end-to-end suite, fixture themes, CI WordPress installer
 ├── bin/                          build-zip.php, check-version.php, check-pot.php (build/CI helpers, run with PHP)
 ├── .github/                      CI and release workflows, Dependabot
-└── docs/                         ARCHITECTURE.md, TESTING.md
+└── docs/                         ARCHITECTURE.md, TESTING.md, TODO.md, features/ (one spec per planned feature)
 ```
 
 Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Manual and automated testing: [docs/TESTING.md](docs/TESTING.md).

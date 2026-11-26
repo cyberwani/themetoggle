@@ -80,6 +80,16 @@ If a request conflicts with one of these, stop and explain the conflict instead 
 | Users list column / bulk action | `includes/class-users-list.php` |
 | Theme-mod / widget protection | `includes/class-data-guard.php` |
 | Activation / uninstall | `includes/class-installer.php`, `uninstall.php` |
+| Planned features and their specs | `docs/features/` (`feature-TTF001.md` …), status list in `docs/TODO.md` |
+
+## Features with an ID
+
+Planned features have a Feature ID (`TTF001` …) and a spec in `docs/features/feature-<ID>.md`. When working on one:
+
+1. Read its spec first, then check it against the current code: the code may have moved on since the spec was written.
+2. Answer or raise the spec's open questions before building.
+3. Put the ID in the branch (`feature/TTF007-…`), commit subjects (`TTF007: …`) and the `CHANGELOG.md` entry.
+4. When the status changes, update the spec's header table, the "Features" table in `docs/TODO.md` and `docs/ThemeToggle feature ideas.xlsx` together. Add decisions to the spec's "Decision log".
 
 ## Background
 
