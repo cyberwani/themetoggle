@@ -14,7 +14,7 @@ The overview lives in two places that must stay in step:
 - A rejected feature keeps its ID and file; set its status to Rejected and say why under "Decision log".
 - Use the ID wherever the work shows up:
     - branch: `feature/TTF007-role-default-theme`
-    - commit subject: `TTF007: Add role default theme setting`
+    - commit subject: `TTF007: Add role default theme setting`. Commits that only change a spec or the sheet are internal: `Internal: TTF007 spec: answer open questions` (see "Commit subjects" in `AGENTS.md`).
     - `CHANGELOG.md` entry: `- Default theme per role (TTF007).`
     - pull request title and e2e check names where it helps: `TTF007 role default: editor gets tt-child`
 

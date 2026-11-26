@@ -18,6 +18,7 @@
 *.gif  binary
 *.ico  binary
 *.zip  binary
+*.xlsx binary
 *.mo   binary
 
 # Development-only files are left out of `git archive` (composer run zip, release workflow).
