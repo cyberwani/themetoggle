@@ -88,3 +88,4 @@ Follow the "Release checklist" in `README.md`: bump the version in all four plac
 - `bin/*.php` must keep the `PHP_SAPI` guard; repo checkouts can be web-reachable.
 - e2e: count Users-list rows with `name="users[]"`; the `check-column` markup changes between WordPress versions (a count of 0 = 0 passes silently).
 - e2e: after re-pointing the plugin symlink, restart `php -S`; PHP's realpath cache keeps serving the old code.
+- `phpcs.xml.dist` exclude patterns must stay anchored (`type="relative"`, `^build/*`). An unanchored `/build/*` matches the full path, so a checkout under any folder named `build`, `vendor` or `bin` silently checks nothing and reports "0 errors". When PHPCS reports nothing, prove it ran: plant a file with a known violation and confirm it is reported.

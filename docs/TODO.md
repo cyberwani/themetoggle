@@ -44,6 +44,7 @@ Last updated: 2026-11-26
 
 Add new findings here, newest first.
 
+- [x] 2026-11-26 — `composer phpcs` warned about an unaligned `=` in `includes/class-floating-button.php`, introduced by the security fixes. Root cause of it slipping through: `phpcs.xml.dist` excluded `/build/*` unanchored, which matched the sandbox path `/home/claude/build/…`, so PHPCS there checked no files. Patterns are now anchored to the plugin folder; warning fixed.
 - [x] 2026-11-26 — Role-Based Theme Assignment listed theme checkboxes for every role, even roles not ticked as allowed (e.g. Contributor, Subscriber). Now only allowed roles have a row; rows show/hide live when a role is ticked; an unticked role keeps its saved themes; with no role ticked a hint is shown. Covered by 8 e2e checks (server-rendered HTML) and a 13-check jsdom run of the live toggle.
 - [ ] …
 

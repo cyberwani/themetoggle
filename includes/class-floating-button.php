@@ -123,7 +123,7 @@ class Floating_Button {
 			$this->settings->get_clean( 'button_text_color' ),
 			(int) $this->settings->get_clean( 'button_radius' )
 		);
-		$view     = array(
+		$view  = array(
 			'mode'     => $mode,
 			'classes'  => $classes,
 			'style'    => $style,

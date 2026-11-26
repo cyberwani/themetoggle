@@ -3,11 +3,11 @@
 	<description>WordPress Coding Standards and PHP 7.4+ compatibility for ThemeToggle.</description>
 
 	<file>.</file>
-	<exclude-pattern>/vendor/*</exclude-pattern>
-	<exclude-pattern>/node_modules/*</exclude-pattern>
-	<exclude-pattern>/build/*</exclude-pattern>
+	<exclude-pattern type="relative">^vendor/*</exclude-pattern>
+	<exclude-pattern type="relative">^node_modules/*</exclude-pattern>
+	<exclude-pattern type="relative">^build/*</exclude-pattern>
 	<!-- Dev-only CLI helpers (never shipped); still syntax-checked by `composer lint` on PHP 7.4+. -->
-	<exclude-pattern>/bin/*</exclude-pattern>
+	<exclude-pattern type="relative">^bin/*</exclude-pattern>
 
 	<arg name="extensions" value="php"/>
 	<arg name="parallel" value="8"/>
