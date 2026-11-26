@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-26T05:37:30+00:00\n"
+"POT-Creation-Date: 2026-11-26T09:44:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: themetoggle\n"
@@ -112,9 +112,9 @@ msgid "Keep saved preference (%s, currently unavailable)"
 msgstr ""
 
 #: admin/views/profile-section.php:74
-#: admin/views/settings-general.php:56
+#: admin/views/settings-general.php:66
 #: includes/class-user-profile.php:128
-#: includes/class-users-list.php:125
+#: includes/class-users-list.php:139
 msgid "Default Theme"
 msgstr ""
 
@@ -174,19 +174,31 @@ msgstr ""
 msgid "For safety the default theme is always used on: Themes, Theme File Editor, Add Themes, Site Editor, Customizer, Widgets, Menus, Updates, and this settings page."
 msgstr ""
 
-#: admin/views/settings-general.php:65
+#: admin/views/settings-general.php:56
+msgid "Users List Column"
+msgstr ""
+
+#: admin/views/settings-general.php:60
+msgid "Show the \"Selected Theme\" column in Users → All Users"
+msgstr ""
+
+#: admin/views/settings-general.php:62
+msgid "Hiding the column also turns off sorting by it. The \"Reset selected users' themes\" bulk action stays available. Each administrator can also hide the column just for themselves under Screen Options on the Users page."
+msgstr ""
+
+#: admin/views/settings-general.php:75
 msgid "Stylesheet directory:"
 msgstr ""
 
-#: admin/views/settings-general.php:71
+#: admin/views/settings-general.php:81
 msgid "Detected automatically. ThemeToggle never changes the globally active theme; change it under Appearance → Themes."
 msgstr ""
 
-#: admin/views/settings-general.php:77
+#: admin/views/settings-general.php:87
 msgid "Fallback behavior"
 msgstr ""
 
-#: admin/views/settings-general.php:79
+#: admin/views/settings-general.php:89
 msgid "The default theme is always used when a user has no selection, is not authorized, or has a saved theme that is invalid, no longer permitted, or no longer installed."
 msgstr ""
 
@@ -275,7 +287,7 @@ msgid "Button label"
 msgstr ""
 
 #: admin/views/settings-interface.php:73
-#: includes/class-settings.php:242
+#: includes/class-settings.php:252
 msgid "Switch to Default Theme"
 msgstr ""
 
@@ -437,50 +449,50 @@ msgstr ""
 msgid "The selected theme is not available for this account. The theme preference was not changed."
 msgstr ""
 
-#: includes/class-users-list.php:78
+#: includes/class-users-list.php:92
 msgid "Selected Theme"
-msgstr ""
-
-#. translators: %s: Theme name.
-#: includes/class-users-list.php:134
-#, php-format
-msgid "(saved: %s, now the site default)"
-msgstr ""
-
-#. translators: %s: Theme name.
-#: includes/class-users-list.php:138
-#, php-format
-msgid "(switching disabled; saved: %s)"
-msgstr ""
-
-#. translators: %s: Theme name.
-#: includes/class-users-list.php:143
-#, php-format
-msgid "(Invalid Selection: %s — role not eligible)"
 msgstr ""
 
 #. translators: %s: Theme name.
 #: includes/class-users-list.php:148
 #, php-format
+msgid "(saved: %s, now the site default)"
+msgstr ""
+
+#. translators: %s: Theme name.
+#: includes/class-users-list.php:152
+#, php-format
+msgid "(switching disabled; saved: %s)"
+msgstr ""
+
+#. translators: %s: Theme name.
+#: includes/class-users-list.php:157
+#, php-format
+msgid "(Invalid Selection: %s — role not eligible)"
+msgstr ""
+
+#. translators: %s: Theme name.
+#: includes/class-users-list.php:162
+#, php-format
 msgid "(Invalid Selection: %s — not permitted for role)"
 msgstr ""
 
 #. translators: %s: Theme directory.
-#: includes/class-users-list.php:153
+#: includes/class-users-list.php:167
 #, php-format
 msgid "(Invalid Selection: %s — theme not installed)"
 msgstr ""
 
-#: includes/class-users-list.php:225
+#: includes/class-users-list.php:239
 msgid "Reset selected users' themes"
 msgstr ""
 
-#: includes/class-users-list.php:248
+#: includes/class-users-list.php:262
 msgid "Sorry, you are not allowed to edit users."
 msgstr ""
 
 #. translators: %d: Number of users.
-#: includes/class-users-list.php:286
+#: includes/class-users-list.php:300
 #, php-format
 msgid "Theme preference reset for %d user."
 msgid_plural "Theme preferences reset for %d users."
