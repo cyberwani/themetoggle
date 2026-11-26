@@ -49,6 +49,7 @@ Use the accounts from the e2e setup or your own. ✅ = expected result.
 - [ ] Turning admin switching on/off changes only wp-admin; the Themes, Widgets, Menus, Site Editor, Customizer and ThemeToggle screens never switch.
 - [ ] Allowed roles list includes custom roles (for example WooCommerce "Shop manager").
 - [ ] Role table shows screenshots, stylesheet directory, "Child of …" and "(site default)".
+- [ ] Only roles ticked under "User Roles Allowed to Switch Themes" have a theme row; ticking or unticking a role shows or hides its row at once. Untick a role, save, tick it again: its earlier theme choices are still there. With no role ticked, a hint replaces the table.
 - [ ] Users → All Users shows "Selected Theme": theme name in bold for valid choices, "Default Theme (Invalid Selection: …)" for invalid ones; the column sorts without hiding users.
 - [ ] Bulk action "Reset selected users' themes" clears only the ticked users.
 - [ ] Editing another user's profile shows that user's permitted themes only.

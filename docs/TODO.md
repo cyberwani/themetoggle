@@ -44,6 +44,7 @@ Last updated: 2026-11-26
 
 Add new findings here, newest first.
 
+- [x] 2026-11-26 — Role-Based Theme Assignment listed theme checkboxes for every role, even roles not ticked as allowed (e.g. Contributor, Subscriber). Now only allowed roles have a row; rows show/hide live when a role is ticked; an unticked role keeps its saved themes; with no role ticked a hint is shown. Covered by 8 e2e checks (server-rendered HTML) and a 13-check jsdom run of the live toggle.
 - [ ] …
 
 ## Done

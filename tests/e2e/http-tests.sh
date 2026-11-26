@@ -232,6 +232,17 @@ check "editor cannot open settings" "$(get editor1 "$BASE/wp-admin/themes.php?pa
 S=$(get admin "$BASE/wp-admin/themes.php?page=themetoggle&tab=roles")
 contains "roles tab lists custom role" "$S" 'Shop Manager'
 contains "roles tab lists child theme with parent info" "$S" 'Child of Twenty Twenty-One'
+contains "roles tab: allowed role's theme row is shown" "$S" 'data-tt-role="editor" *>'
+contains "roles tab: non-allowed role's theme row is hidden" "$S" 'data-tt-role="contributor" hidden>'
+contains "roles tab: hidden role keeps its saved theme ticked (still submitted on save)" "$S" "role_themes\]\[contributor\]\[\]\" value=\"twentytwentytwo\" *checked="
+contains "roles tab: no-roles hint hidden while a role is allowed" "$S" 'data-tt-no-roles hidden>'
+lacks "roles tab: no Allowed/Not allowed badges" "$S" 'tt-badge'
+patch_settings '{"allowed_roles":[]}'
+S0=$(get admin "$BASE/wp-admin/themes.php?page=themetoggle&tab=roles")
+contains "roles tab with no allowed roles: table hidden" "$S0" 'data-tt-role-table hidden>'
+contains "roles tab with no allowed roles: hint shown" "$S0" 'data-tt-no-roles *>'
+check "roles tab with no allowed roles: assignments kept" "$($WP eval 'echo implode( ",", get_option( "tt_settings" )["role_themes"]["contributor"] );')" "twentytwentytwo"
+set_settings "$SETTINGS_BASE"
 ON=$(grep -o 'name="_wpnonce" value="[^"]*"' <<<"$S" | head -1 | sed 's/.*value="//; s/"//')
 patch_settings '{"button_label":"Keep me"}'
 get admin "$BASE/wp-admin/options.php" -o /dev/null -e "$BASE/wp-admin/themes.php?page=themetoggle&tab=roles" \

@@ -132,6 +132,8 @@ Breaking any of these is a bug, whatever the feature request says.
 
 Role slugs are matched exactly against `wp_roles()` (not `sanitize_key()`: third-party roles may contain upper case). Theme slugs must pass `Theme_Manager::is_installed()`.
 
+The Role-Based Themes tab only shows theme rows for allowed roles, but rows of other roles are hidden (`hidden` attribute, toggled live by `assets/js/admin.js`), not left out of the form. Their checkboxes are still submitted, so saving the tab never wipes a role's assignments when it is unticked. Do not change that to removing the rows unless `Settings::sanitize()` is changed to keep assignments of roles missing from the payload.
+
 ## Security model
 
 | Action | Endpoint | Nonce | Capability |

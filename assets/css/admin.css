@@ -59,22 +59,18 @@
 	font-weight: 400;
 }
 
-.tt-badge {
-	display: inline-block;
-	padding: 1px 8px;
-	border-radius: 10px;
-	font-size: 11px;
-	font-weight: 400;
+.tt-role-table[hidden],
+.tt-role-table tr[hidden],
+.tt-no-roles[hidden] {
+	display: none;
 }
 
-.tt-badge--on {
-	background: #d1e4dd;
-	color: #00450c;
-}
-
-.tt-badge--off {
-	background: #f0f0f1;
-	color: #50575e;
+.tt-no-roles {
+	margin: 12px 0;
+	padding: 8px 12px;
+	border-left: 4px solid #72aee6;
+	background: #f6f7f7;
+	max-width: 760px;
 }
 
 .tt-theme-grid {
