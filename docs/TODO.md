@@ -66,7 +66,8 @@ Add new findings here, newest first.
 
 - [x] PHPCS (WordPress standard + PHP 7.4 compatibility): 0 errors, 0 warnings.
 - [x] JS, CSS and Markdown lint clean.
-- [x] End-to-end suite: 123 checks passing on a fresh site (WordPress 7.3-alpha, PHP 8.3, SQLite).
+- [x] End-to-end suite: 145 checks passing on a fresh site (WordPress 7.3-alpha, PHP 8.3, SQLite).
+- [x] Security audit (2026-11-26): `bin/` scripts made CLI-only; Users-list sort keeps other plugins' `meta_query`; filter-supplied themes validated and never applied on excluded screens (a broken one could switch the site theme); button styles re-validated on output. Each fix has e2e checks that failed on the old code. Also fixed a vacuous Users-list row count in the e2e suite.
 
 ### Tooling and docs
 

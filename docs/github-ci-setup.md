@@ -119,7 +119,7 @@ If the version check fails, the release is not published: fix the version number
 These workflows were dry-run outside GitHub; the first real run settles the rest:
 
 - The workflow files parse as valid YAML and were reviewed by hand; they have not run on GitHub, and `actionlint` was not run.
-- The MySQL service and the theme downloads in `tests/e2e/ci-install-wordpress.sh` were not tested. Every step after them ran as CI runs it, and all 123 end-to-end checks passed on a fresh site.
+- The MySQL service and the theme downloads in `tests/e2e/ci-install-wordpress.sh` were not tested. Every step after them ran as CI runs it, and all 145 end-to-end checks passed on a fresh site.
 - WordPress 6.7 with PHP 7.4 was not tested locally.
 - `composer install` from Packagist was not tested in the sandbox; you have since run it successfully on your machine.
 

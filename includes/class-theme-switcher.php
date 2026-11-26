@@ -186,7 +186,18 @@ class Theme_Switcher {
 		 */
 		$theme = apply_filters( 'themetoggle_applied_theme', $theme, $this->is_preview );
 
-		if ( ! $theme instanceof WP_Theme || $theme->get_stylesheet() === get_option( 'stylesheet' ) ) {
+		// A theme supplied through the filter must pass the same checks as a saved
+		// preference: installed and error-free (a child theme needs its parent).
+		// Screens and requests classified as "none" (theme management, widgets,
+		// menus, Site Editor, Customizer, CLI, cron) are never switched, even by
+		// the filter; use themetoggle_request_context to change the classification.
+		if (
+			Request_Context::NONE === $this->context->get()
+			|| ! $theme instanceof WP_Theme
+			|| ! $theme->exists()
+			|| $theme->errors()
+			|| $theme->get_stylesheet() === get_option( 'stylesheet' )
+		) {
 			$theme            = null;
 			$this->is_preview = false;
 		}

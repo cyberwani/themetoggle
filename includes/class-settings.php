@@ -174,6 +174,24 @@ class Settings {
 	}
 
 	/**
+	 * Returns one setting re-validated with the same rules as on save.
+	 *
+	 * Used where a stored value reaches output (for example inside a style
+	 * attribute), so a value written to the database without going through
+	 * sanitize() can never be printed as-is.
+	 *
+	 * @param string $key Setting key.
+	 * @return mixed
+	 */
+	public function get_clean( $key ) {
+		if ( ! array_key_exists( $key, self::get_defaults() ) ) {
+			return null;
+		}
+
+		return $this->sanitize_value( $key, $this->get( $key ) );
+	}
+
+	/**
 	 * Whether the master switch is on.
 	 *
 	 * @return bool
@@ -219,7 +237,7 @@ class Settings {
 	 * @return string
 	 */
 	public function get_button_label() {
-		$label = (string) $this->get( 'button_label' );
+		$label = (string) $this->get_clean( 'button_label' );
 
 		return '' !== $label ? $label : __( 'Switch to Default Theme', 'themetoggle' );
 	}

@@ -60,7 +60,8 @@ class Users_List {
 		add_filter( 'manage_users_columns', array( $this, 'add_column' ) );
 		add_filter( 'manage_users_custom_column', array( $this, 'render_column' ), 10, 3 );
 		add_filter( 'manage_users_sortable_columns', array( $this, 'add_sortable' ) );
-		add_action( 'pre_get_users', array( $this, 'apply_sorting' ) );
+		// Late, so restrictions other plugins add to the query are already present and get merged.
+		add_action( 'pre_get_users', array( $this, 'apply_sorting' ), 99 );
 		add_filter( 'bulk_actions-users', array( $this, 'add_bulk_action' ) );
 		add_filter( 'handle_bulk_actions-users', array( $this, 'handle_bulk_action' ), 10, 3 );
 		add_action( 'admin_notices', array( $this, 'bulk_notice' ) );
@@ -173,7 +174,8 @@ class Users_List {
 
 	/**
 	 * Sorts by the saved stylesheet while keeping users without a preference
-	 * (a plain meta_key orderby would drop them via an INNER JOIN).
+	 * (a plain meta_key orderby would drop them via an INNER JOIN) and without
+	 * discarding meta_query restrictions that are already on the query.
 	 *
 	 * @param WP_User_Query $query Query.
 	 * @return void
@@ -183,22 +185,32 @@ class Users_List {
 			return;
 		}
 
-		// phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Admin-only, user-initiated sort.
-		$query->set(
-			'meta_query',
+		$sort_clause = array(
+			'relation'      => 'OR',
+			'tt_theme_pref' => array(
+				'key'     => Theme_Resolver::META_KEY,
+				'compare' => 'EXISTS',
+			),
 			array(
-				'relation'      => 'OR',
-				'tt_theme_pref' => array(
-					'key'     => Theme_Resolver::META_KEY,
-					'compare' => 'EXISTS',
-				),
-				array(
-					'key'     => Theme_Resolver::META_KEY,
-					'compare' => 'NOT EXISTS',
-				),
-			)
+				'key'     => Theme_Resolver::META_KEY,
+				'compare' => 'NOT EXISTS',
+			),
 		);
-		// phpcs:enable WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+
+		// Keep any meta_query already on the query (core or other plugins may use it
+		// to restrict which users are listed); only add the sort clause beside it.
+		$existing = $query->get( 'meta_query' );
+
+		if ( is_array( $existing ) && ! empty( $existing ) ) {
+			$sort_clause = array(
+				'relation' => 'AND',
+				$existing,
+				$sort_clause,
+			);
+		}
+
+		// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Admin-only, user-initiated sort.
+		$query->set( 'meta_query', $sort_clause );
 		$query->set( 'orderby', 'tt_theme_pref' );
 	}
 

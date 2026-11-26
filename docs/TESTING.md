@@ -22,12 +22,15 @@ php -S 127.0.0.1:8899 -t "$TT_WP_PATH" &
 composer test:e2e
 ```
 
-`home` and `siteurl` of the site must equal `TT_BASE`. Expected result: `RESULT: 123 passed, 0 failed`, and no ThemeToggle lines in `wp-content/debug.log`.
+`home` and `siteurl` of the site must equal `TT_BASE`. Expected result: `RESULT: 145 passed, 0 failed`, and no ThemeToggle lines in `wp-content/debug.log`.
 
 Fixtures:
 
 - `tt-child` — child of Twenty Twenty-One. Prints `<meta name="tt-functions">` on the frontend and `tt-functions-admin` in wp-admin, calls `set_theme_mod()` when `?tt_setmod=1`, registers its own sidebar.
 - `tt-orphan` — child of a theme that does not exist (must never load).
+- `mu-plugins/tt-e2e-hooks.php` — test-only must-use plugin, copied in by `setup.sh`. With `?tt_e2e_hide_users=1` it restricts the Users list through a `meta_query` (like another plugin would); with `?tt_e2e_broken_theme=1` / `?tt_e2e_force_theme=<slug>` it returns a broken or forced theme through `themetoggle_applied_theme`. It does nothing without those parameters.
+
+Row counts on Users → All Users use the `users[]` checkboxes; the `check-column` markup differs between WordPress versions.
 
 Adding a test: use the helpers in `lib.sh` (`check`, `contains`, `lacks`, `theme_of`, `meta`, `setmeta`, `patch_settings`), put it under the matching `== section`, and reset any settings you change with `set_settings "$SETTINGS_BASE"`.
 

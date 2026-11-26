@@ -217,8 +217,9 @@ contains "valid selection shows theme name" "$U" '<strong>TT Child of 2021</stro
 contains "invalid selection flagged, not shown as active" "$U" 'Invalid Selection: TT Child of 2021'
 contains "no preference shows Default Theme" "$U" 'Default Theme'
 contains "bulk action offered" "$U" 'value="tt_reset_theme"'
-TOTAL=$(grep -c 'class="check-column"><input' <<<"$U")
-check "sorting by theme keeps users without preference" "$(get admin "$BASE/wp-admin/users.php?orderby=tt_theme&order=asc" | grep -c 'class="check-column"><input')" "$TOTAL"
+TOTAL=$(grep -c 'name="users\[\]"' <<<"$U")
+if [ "$TOTAL" -gt 0 ]; then ok "users list shows user rows ($TOTAL)"; else bad "users list shows user rows" "row pattern matched nothing"; fi
+check "sorting by theme keeps users without preference" "$(get admin "$BASE/wp-admin/users.php?orderby=tt_theme&order=asc" | grep -c 'name="users\[\]"')" "$TOTAL"
 EID=$($WP user get editor1 --field=ID)
 check "bulk reset without nonce rejected" "$(get admin "$BASE/wp-admin/users.php?action=tt_reset_theme&users[]=$EID" -o /dev/null -w '%{http_code}' -e "$BASE/wp-admin/users.php")" "403"
 check "bulk reset without nonce: preference kept" "$(meta editor1)" "tt-child"
@@ -259,6 +260,43 @@ get admin "$BASE/wp-admin/admin-post.php" -o /dev/null -d action=tt_reset_all -d
 check "reset all without confirmation does nothing" "$(meta editor1)" "tt-child"
 get admin "$BASE/wp-admin/admin-post.php" -o /dev/null -d action=tt_reset_all -d tt_confirm_reset=1 -d "tt_nonce=$RAN"
 check "reset all with confirmation clears everyone" "$(meta editor1)$(meta author1)" ""
+
+echo "== Security hardening (audit 2026-11-26)"
+login admin adminpass; login editor1 pass123
+# 1. Dev helpers in bin/ refuse to run over HTTP.
+for script in build-zip.php check-pot.php check-version.php; do
+	CODE=$(curl -s -o /tmp/tt-bin-body -w '%{http_code}' "$BASE/wp-content/plugins/themetoggle/bin/$script")
+	check "bin/$script over HTTP is refused (403)" "$CODE" "403"
+	check "bin/$script over HTTP prints nothing" "$(wc -c < /tmp/tt-bin-body | tr -d ' ')" "0"
+done
+# 2. Sorting by Selected Theme keeps another plugin's meta_query restriction.
+$WP user meta update editor1 tt_e2e_visible 1 >/dev/null; $WP user meta update author1 tt_e2e_visible 1 >/dev/null
+VISIBLE=$(get admin "$BASE/wp-admin/users.php?tt_e2e_hide_users=1" | grep -c 'name="users\[\]"')
+check "fixture restriction lists only the 2 marked users" "$VISIBLE" "2"
+check "sorting by Selected Theme keeps the restriction" "$(get admin "$BASE/wp-admin/users.php?tt_e2e_hide_users=1&orderby=tt_theme&order=asc" | grep -c 'name="users\[\]"')" "2"
+check "sorting by Selected Theme without restriction still lists everyone" "$(get admin "$BASE/wp-admin/users.php?orderby=tt_theme&order=desc" | grep -c 'name="users\[\]"')" "$(get admin "$BASE/wp-admin/users.php" | grep -c 'name="users\[\]"')"
+$WP user meta delete editor1 tt_e2e_visible >/dev/null; $WP user meta delete author1 tt_e2e_visible >/dev/null
+# 3. A broken theme returned by the themetoggle_applied_theme filter is ignored.
+setmeta editor1 tt-child
+check "broken theme from filter falls back to default" "$(theme_of editor1 "$BASE/?tt_e2e_broken_theme=1")" "twentytwentyfive"
+lacks "broken theme from filter: no floating button" "$(get editor1 "$BASE/?tt_e2e_broken_theme=1")" 'tt-floating__button'
+contains "valid filter result still applies" "$(get editor1 "$BASE/")" 'tt-functions'
+setmeta admin ""
+lacks "filter cannot force a theme on an excluded screen (themes.php)" "$(get admin "$BASE/wp-admin/themes.php?tt_e2e_force_theme=tt-child")" 'tt-functions-admin'
+lacks "filter cannot force a theme on an excluded screen (widgets.php)" "$(get admin "$BASE/wp-admin/widgets.php?tt_e2e_force_theme=tt-child")" 'tt-functions-admin'
+check "global theme unchanged after forced/broken filter results" "$($WP option get stylesheet)" "twentytwentyfive"
+get admin "$BASE/wp-admin/themes.php?tt_e2e_broken_theme=1" -o /dev/null
+check "broken theme from filter on themes.php does not switch the site theme" "$($WP option get stylesheet)" "twentytwentyfive"
+# 4. Button styles are re-validated on output, even if the stored option was tampered with.
+patch_settings '{"button_bg_color":"red;background:url(https://evil.example/x)","button_text_color":"#fff\" onmouseover=\"x","button_position":"x onmouseover=alert(1)","button_size":"huge","button_radius":"999","button_icon":"<script>"}'
+HTML=$(get editor1 $BASE/)
+lacks "tampered colour: no injected CSS" "$HTML" 'evil.example'
+lacks "tampered values: no injected attributes" "$HTML" 'onmouseover'
+contains "tampered colour falls back to default" "$HTML" '--tt-bg:#1d2327;--tt-color:#ffffff;'
+contains "tampered radius is clamped" "$HTML" '--tt-radius:50px;'
+contains "tampered position/size fall back to defaults" "$HTML" 'tt-floating tt-floating--bottom-right tt-floating--medium'
+set_settings "$SETTINGS_BASE"
+setmeta editor1 ""
 
 echo "== Logout / deletion"
 setmeta editor1 tt-child

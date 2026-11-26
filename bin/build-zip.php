@@ -12,6 +12,13 @@
  * @package ThemeToggle
  */
 
+// Command-line only: refuse to run when the file is requested over HTTP
+// (for example on a site that runs a git checkout instead of the release zip).
+if ( 'cli' !== PHP_SAPI ) {
+	http_response_code( 403 );
+	exit;
+}
+
 $root   = dirname( __DIR__ );
 $slug   = 'themetoggle';
 $target = $root . '/build/' . $slug . '.zip';

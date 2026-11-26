@@ -122,6 +122,9 @@ Breaking any of these is a bug, whatever the feature request says.
 8. Nothing on the resolution path lists all themes (`wp_get_themes()` is admin-screen only).
 9. No translation calls before `init` (WordPress 6.7+ warns on early textdomain loading). Settings defaults hold `''` for the label for this reason.
 10. Resolution must be safe before the user is known: if `plugins_loaded` has not fired or `wp_get_current_user()` does not exist, return the original value and do not cache.
+11. A theme coming from the `themetoggle_applied_theme` filter gets the same checks as a saved preference (installed, `errors()` empty), and nothing is applied when the request context is `none`. A broken theme reaching the Themes screen or the Customizer would make `validate_current_theme()` call `switch_theme()` and change the site's real theme.
+12. Stored settings that reach output are re-validated there (`Settings::get_clean()`), not only on save: `esc_attr()` stops attribute breakout but not CSS injected inside a `style` attribute.
+13. Scripts in `bin/` are command-line only (`PHP_SAPI` guard): a git checkout can sit under a web root.
 
 ## Settings storage
 

@@ -73,7 +73,7 @@ Uninstalling (deleting the plugin) removes `tt_settings` and every `tt_user_them
 
 == Hooks for developers ==
 
-* `themetoggle_applied_theme` (filter) — WP_Theme|null to apply; return null to keep the default.
+* `themetoggle_applied_theme` (filter) — WP_Theme|null to apply; return null to keep the default. A returned theme must be installed and error-free, and is never applied on excluded screens.
 * `themetoggle_request_context` (filter) — 'frontend', 'admin' or 'none'.
 * `themetoggle_excluded_admin_pages` (filter) — admin file names never switched.
 * `themetoggle_excluded_ajax_actions` (filter) — AJAX actions never switched.

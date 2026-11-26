@@ -164,7 +164,7 @@ Deactivation removes nothing. Deleting the plugin runs `uninstall.php`, which de
 
 | Hook | Type | Purpose |
 | --- | --- | --- |
-| `themetoggle_applied_theme` | filter | `WP_Theme\|null` to apply for this request; return `null` to keep the default. Second arg: `$is_preview`. |
+| `themetoggle_applied_theme` | filter | `WP_Theme\|null` to apply for this request; return `null` to keep the default. Second arg: `$is_preview`. A returned theme is ignored unless it is installed and error-free, and it never applies on excluded screens (use `themetoggle_request_context` to change that classification). |
 | `themetoggle_request_context` | filter | `'frontend'`, `'admin'` or `'none'`. |
 | `themetoggle_excluded_admin_pages` | filter | Admin file names that are never switched. |
 | `themetoggle_excluded_ajax_actions` | filter | AJAX actions that are never switched. |
@@ -186,7 +186,7 @@ add_filter(
 ## Testing
 
 - **Static:** `composer check` and `npm run lint` must report 0 errors and 0 warnings.
-- **End-to-end:** `tests/e2e/` drives a real WordPress install over HTTP (123 checks: role rules, child themes, forged requests, open redirects, cache headers, admin/REST contexts, theme-mod and widget protection, users list, settings sanitising). It creates users and switches the active theme, so **only run it on a disposable site**. See [tests/e2e/README.md](tests/e2e/README.md).
+- **End-to-end:** `tests/e2e/` drives a real WordPress install over HTTP (145 checks: role rules, child themes, forged requests, open redirects, cache headers, admin/REST contexts, theme-mod and widget protection, users list, settings sanitising, CLI-only dev scripts, tampered settings, misbehaving extensions). It creates users and switches the active theme, so **only run it on a disposable site**. See [tests/e2e/README.md](tests/e2e/README.md).
 - **Manual:** the checklist in [docs/TESTING.md](docs/TESTING.md).
 
 PHP compatibility note: PHPCompatibilityWP 2.x flags features missing in PHP 7.4 but does not know PHP 8.0+ syntax. Run `composer lint` with a PHP 7.4 binary (for example in CI) to catch PHP 8-only syntax.

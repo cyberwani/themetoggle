@@ -109,25 +109,26 @@ class Floating_Button {
 			return;
 		}
 
-		$theme    = $this->switcher->get_applied_theme();
-		$settings = $this->settings->get_all();
-		$classes  = array(
+		$theme   = $this->switcher->get_applied_theme();
+		$classes = array(
 			'tt-floating',
-			'tt-floating--' . $settings['button_position'],
-			'tt-floating--' . $settings['button_size'],
+			'tt-floating--' . $this->settings->get_clean( 'button_position' ),
+			'tt-floating--' . $this->settings->get_clean( 'button_size' ),
 		);
-		$style    = sprintf(
+		// Re-validated on output: esc_attr() prevents breaking out of the attribute,
+		// but not CSS injected inside it.
+		$style = sprintf(
 			'--tt-bg:%1$s;--tt-color:%2$s;--tt-radius:%3$dpx;',
-			$settings['button_bg_color'],
-			$settings['button_text_color'],
-			(int) $settings['button_radius']
+			$this->settings->get_clean( 'button_bg_color' ),
+			$this->settings->get_clean( 'button_text_color' ),
+			(int) $this->settings->get_clean( 'button_radius' )
 		);
 		$view     = array(
 			'mode'     => $mode,
 			'classes'  => $classes,
 			'style'    => $style,
 			'label'    => $this->settings->get_button_label(),
-			'icon'     => $settings['button_icon'],
+			'icon'     => $this->settings->get_clean( 'button_icon' ),
 			'theme'    => $theme,
 			'redirect' => Redirect::current_uri(),
 		);

@@ -82,3 +82,9 @@ Follow the "Release checklist" in `README.md`: bump the version in all four plac
 - PHPCompatibilityWP 2.x does not detect PHP 8.0+ syntax → lint with a PHP 7.4 binary too.
 - e2e: the test site's `home`/`siteurl` must equal `TT_BASE`, or login cookies get the wrong path. `wp core install --url=…` can still save a sub-folder URL, so `ci-install-wordpress.sh` sets both options explicitly and `setup.sh` refuses to run on a mismatch.
 - e2e on GitHub: the checkout path contains `themetoggle`, so the debug-log check matches the plugin's real path, not the word.
+- A broken theme on the Themes screen or in the Customizer makes core's `validate_current_theme()` call `switch_theme()` (the site's real theme changes, to `WP_DEFAULT_THEME`). Never let an unvalidated theme through, and never switch on excluded screens.
+- `pre_get_users` callbacks must merge into an existing `meta_query`, never replace it: other plugins restrict user lists that way.
+- Values printed inside `style` / `class` attributes are re-validated at output with `Settings::get_clean()`.
+- `bin/*.php` must keep the `PHP_SAPI` guard; repo checkouts can be web-reachable.
+- e2e: count Users-list rows with `name="users[]"`; the `check-column` markup changes between WordPress versions (a count of 0 = 0 passes silently).
+- e2e: after re-pointing the plugin symlink, restart `php -S`; PHP's realpath cache keeps serving the old code.

@@ -13,6 +13,8 @@ for theme in twentytwentyone twentytwentytwo twentytwentythree twentytwentyfour 
 	$WP theme is-installed "$theme" || { echo "Missing theme $theme (run ci-install-wordpress.sh or wp theme install $theme)" >&2; exit 1; }
 done
 cp -r "$HERE/fixtures/tt-child" "$HERE/fixtures/tt-orphan" "$TT_WP_PATH/wp-content/themes/"
+mkdir -p "$TT_WP_PATH/wp-content/mu-plugins"
+cp "$HERE/fixtures/mu-plugins/tt-e2e-hooks.php" "$TT_WP_PATH/wp-content/mu-plugins/"
 $WP theme activate twentytwentyfive
 $WP plugin activate themetoggle
 $WP role create shop_manager "Shop Manager" || true
