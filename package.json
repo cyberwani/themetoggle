@@ -1,6 +1,6 @@
 {
 	"name": "themetoggle",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"private": true,
 	"description": "Enable user-specific WordPress themes with role-based permissions and personalized theme switching.",
 	"license": "GPL-2.0-or-later",

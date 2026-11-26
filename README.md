@@ -2,7 +2,7 @@
 
 Per-user WordPress themes with role-based permissions. Administrators choose which roles may switch themes and which installed themes each role may use; eligible users pick their own theme in their profile. The globally active theme is never changed: it stays the default for visitors and for everyone without a valid personal choice.
 
-- **Version:** 1.0.0
+- **Version:** 1.0.1
 - **Requires:** WordPress 5.9+, PHP 7.4+
 - **License:** GPL-2.0-or-later
 - **Text domain:** `themetoggle`
@@ -205,12 +205,13 @@ The e2e job uses `tests/e2e/ci-install-wordpress.sh` to build the throwaway site
 
 ## Release checklist
 
-1. Bump the version in `themetoggle.php` (header and `const VERSION`), `readme.txt` (`Stable tag` and a `= X.Y.Z =` changelog entry) and `package.json`. Check with `composer version:check`.
-2. `composer check && npm run lint` — 0 errors, 0 warnings.
-3. `composer make-pot` and commit the updated POT.
-4. Merge to `main` with CI green.
-5. Tag and push: `git tag v1.0.1 && git push origin v1.0.1`. The Release workflow builds and publishes the zip.
-6. Install the zip from the GitHub Release on a clean site and smoke-test the manual checklist.
+1. Bump the version in `themetoggle.php` (header and `const VERSION`), `readme.txt` (`Stable tag` and a `= X.Y.Z =` changelog entry) and `package.json` (and `package-lock.json`). Check with `composer version:check`.
+2. Move the `[Unreleased]` entries in `CHANGELOG.md` under a new `[X.Y.Z] - YYYY-MM-DD` heading and add its compare link at the bottom.
+3. `composer check && npm run lint` — 0 errors, 0 warnings.
+4. `composer make-pot` and commit the updated POT.
+5. Merge to `main` with CI green.
+6. Tag and push: `git tag v1.0.1 && git push origin v1.0.1`. The Release workflow builds and publishes the zip.
+7. Install the zip from the GitHub Release on a clean site and smoke-test the manual checklist.
 
 Without GitHub: `composer zip` (from the last commit) or `npm run plugin-zip` (from the working tree). Both write `build/themetoggle.zip` with the same list of files, but the contents match only when everything is committed: `composer zip` ignores uncommitted changes, while `npm run build` regenerates `languages/themetoggle.pot` (new timestamp, and line numbers can differ between WP-CLI versions) and packs your current files. Commit first, including the regenerated POT, if both zips must be identical.
 

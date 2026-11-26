@@ -12,8 +12,10 @@
 .editorconfig
 .gitattributes
 .gitignore
+.markdownlint.json
 .nvmrc
 AGENTS.md
+CHANGELOG.md
 CLAUDE.md
 README.md
 composer.json

@@ -53,7 +53,8 @@ If a request conflicts with one of these, stop and explain the conflict instead 
 - **Escaping:** escape late (`esc_html`, `esc_attr`, `esc_url`, `wp_kses` for the SVG icons). Sanitise early (`wp_unslash` then `sanitize_text_field` / `absint` / `sanitize_key`). Roles are validated against `wp_roles()` exactly; themes with `Theme_Manager::is_installed()`.
 - **Strings:** translatable with the `themetoggle` domain, translator comments for placeholders. Regenerate the POT.
 - **Docs:** update `README.md`, `readme.txt`, `docs/ARCHITECTURE.md` or `docs/TESTING.md` when behaviour, hooks, settings or commands change.
-- **Version bumps:** `themetoggle.php` header and `const VERSION`, `readme.txt` Stable tag + changelog, `package.json`; verify with `composer version:check`. Releases are published by pushing a `vX.Y.Z` tag (`.github/workflows/release.yml`).
+- **Changelog:** add every user-visible or developer-relevant change to `## [Unreleased]` in `CHANGELOG.md` (Keep a Changelog sections: Added, Changed, Fixed, Security, Removed), with the commit hash once committed.
+- **Version bumps:** `themetoggle.php` header and `const VERSION`, `readme.txt` Stable tag + changelog, `package.json` (+ `package-lock.json`), and a `CHANGELOG.md` section; verify with `composer version:check`. Releases are published by pushing a `vX.Y.Z` tag (`.github/workflows/release.yml`).
 - **CI:** `.github/workflows/ci.yml` must stay green. If you add a check locally, add it there too; if you change a test helper or the e2e setup, keep `tests/e2e/ci-install-wordpress.sh` working.
 
 ## Definition of done

@@ -3,7 +3,7 @@ Tags: theme switcher, user theme, role, child theme, preview
 Requires at least: 5.9
 Tested up to: 7.3
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,7 +82,7 @@ Uninstalling (deleting the plugin) removes `tt_settings` and every `tt_user_them
 
 == Known limitations ==
 
-* Multisite: not supported or tested in 1.0.0. Settings are per site, but user meta is network-wide; the meta key is centralised in `Theme_Resolver::META_KEY` so a per-site key can be introduced later without restructuring.
+* Multisite: not supported or tested yet. Settings are per site, but user meta is network-wide; the meta key is centralised in `Theme_Resolver::META_KEY` so a per-site key can be introduced later without restructuring.
 * Classic themes keep their own settings (menus locations, logo, etc.) per theme. A theme that was never active has no settings of its own and inherits the default theme's settings read-only until it saves its own.
 * While a user-specific theme is applied, widget layout changes are not saved (manage widgets from Appearance → Widgets, which always uses the default theme).
 * remove_theme_mods() deletes the option directly and cannot be intercepted; core only calls it from the Customizer, which is never switched.
@@ -90,6 +90,13 @@ Uninstalling (deleting the plugin) removes `tt_settings` and every `tt_user_them
 * Requests with a missing Referer (some privacy extensions strip it) are not switched for AJAX/REST.
 
 == Changelog ==
+
+= 1.0.1 =
+* New: General Settings option "Users List Column" to show or hide the "Selected Theme" column in Users → All Users.
+* Changed: Role-Based Theme Assignment only lists themes for roles ticked as allowed; unticking a role keeps its saved themes.
+* Fixed: the floating button keeps its style on sites using Elementor.
+* Security: themes supplied by the themetoggle_applied_theme filter are validated and never applied on excluded screens; Users-list sorting keeps other plugins' restrictions; button styles are re-validated on output; development scripts refuse to run over HTTP.
+* Developer tooling: Composer and npm scripts work on Windows; identical release zips from Composer and npm; PHPCS exclude patterns fixed.
 
 = 1.0.0 =
 * Initial release.
